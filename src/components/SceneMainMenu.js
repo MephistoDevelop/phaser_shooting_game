@@ -1,9 +1,11 @@
 class SceneMainMenu extends Phaser.Scene{
   constructor(){
-    super({key: "SceneMain"});
+    super({key: "SceneMainMenu"});
   }
 
   create(){
-    this.scene.start("SceneMain");
+    this.scene.start("SceneMainMenu");
   }
 }
+
+export default SceneMainMenu;

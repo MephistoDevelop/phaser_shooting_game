@@ -22,5 +22,8 @@
       "browser": true,
       "node": true
     }
+  },
+  "dependencies": {
+    "phaser": "^3.22.0"
   }
 }

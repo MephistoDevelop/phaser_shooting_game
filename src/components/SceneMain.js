@@ -7,3 +7,5 @@ class SceneMain extends Phaser.Scene{
 
   }
 }
+
+export default SceneMain;
