@@ -1,4 +1,4 @@
-import ScrollingBackground from './Entities';
+import{ ScrollingBackground} from './Entities';
 class SceneMainMenu extends Phaser.Scene {
   constructor() {
     super({ key: 'SceneMainMenu' });

@@ -7,7 +7,7 @@ var config = {
   type: Phaser.WEBGL,
   width: 480,
   height: 640,
-  backgroundColor: 'blue',
+  backgroundColor: 'none',
   physics: {
     default: 'arcade',
     arcade: {

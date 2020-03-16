@@ -10,9 +10,9 @@ class Entity extends Phaser.GameObjects.Sprite {
 
 }
 
-class Player extends Entity{
+ class Player extends Entity{
   constructor(scene,x,y,type) {
-    super(secene,x,y,key);
+    super(scene,x,y,type);
     this.setData("speed", 200);
     this.play("sprPlayer");
   }
@@ -26,7 +26,7 @@ class Player extends Entity{
     this.body.velocity.x = -this.getData("speed");
   }
   moveRigth(){
-    this.body.velocity.x = this.getData("speed");
+    this.body.velocity.x += 4;
   }
   update() {
     this.body.setVelocity(0, 0);
@@ -56,7 +56,7 @@ class CarrierShip extends Entity {
   }
 }
 
-export default class ScrollingBackground {
+ class ScrollingBackground {
   constructor(scene, key, velocityY) {
     this.scene = scene;
     this.key = key;
@@ -92,3 +92,5 @@ export default class ScrollingBackground {
     }
   }
 }
+
+export {ScrollingBackground,Player,Entity,ChaserShip,GunShip,CarrierShip};
