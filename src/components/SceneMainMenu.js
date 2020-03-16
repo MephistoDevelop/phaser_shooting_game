@@ -42,6 +42,16 @@ class SceneMainMenu extends Phaser.Scene {
       this.setTexture('sprBtnPlay');
     });
 
+    this.btnPlay.on("pointerdown", function() {
+      this.btnPlay.setTexture("sprBtnPlayDown");
+      this.sfx.btnDown.play();
+    }, this);
+
+    this.btnPlay.on("pointerup", function() {
+      this.btnPlay.setTexture("sprBtnPlay");
+      this.scene.start("SceneMain");
+    }, this);
+
     this.title = this.add.text(
       this.game.config.width * 0.5,
       128,
@@ -50,7 +60,7 @@ class SceneMainMenu extends Phaser.Scene {
         fontFamily: 'monospace',
         fontSize: 48,
         fontStyle: 'bold',
-        color: '#ffffff',
+        color: 'rgba(100,100,65,0.6)',
         align: 'center'
       }
     );

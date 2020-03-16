@@ -2,6 +2,7 @@ import SceneMainMenu from './components/SceneMainMenu';
 import SceneMain from './components/SceneMain';
 import SceneGameOver from './components/SceneGameOver';
 import '../src/components/Entities';
+
 var config = {
   type: Phaser.WEBGL,
   width: 480,
