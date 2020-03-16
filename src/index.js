@@ -1,12 +1,12 @@
 import SceneMainMenu from './components/SceneMainMenu';
 import SceneMain from './components/SceneMain';
 import SceneGameOver from './components/SceneGameOver';
-
+import '../src/components/Entities';
 var config = {
   type: Phaser.WEBGL,
   width: 480,
   height: 640,
-  backgroundColor: 'black',
+  backgroundColor: 'blue',
   physics: {
     default: 'arcade',
     arcade: {
@@ -17,8 +17,4 @@ var config = {
   pixelArt: true,
   roundPixels: true
 };
-
-window.onload = () => {
-  var game = new Phaser.Game(config);
-  console.log(config);
-};
+var game = new Phaser.Game(config);
