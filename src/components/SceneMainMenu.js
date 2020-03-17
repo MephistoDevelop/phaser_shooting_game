@@ -55,12 +55,12 @@ class SceneMainMenu extends Phaser.Scene {
     this.title = this.add.text(
       this.game.config.width * 0.5,
       128,
-      "ALIEN'S ATTACK",
+      "SPACE SHIP'S ATTACK",
       {
         fontFamily: 'monospace',
-        fontSize: 48,
+        fontSize: 32,
         fontStyle: 'bold',
-        color: 'rgba(100,100,65,0.6)',
+        color: 'white',
         align: 'center'
       }
     );
