@@ -16,7 +16,7 @@ Javascript project [Original Page Project](https://www.notion.so/Shooter-game-20
 
 ## Live Demo
 
-[Live Demo Link]()
+[Live Demo Link](https://mephistodevelop.github.io/phaser_shooting_game/)
 
 ## Getting Started
 
