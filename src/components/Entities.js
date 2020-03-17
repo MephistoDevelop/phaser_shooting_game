@@ -32,6 +32,18 @@ class Entity extends Phaser.GameObjects.Sprite {
     this.body.setVelocity(0, 0);
     this.x = Phaser.Math.Clamp(this.x, 0, this.scene.game.config.width);
     this.y = Phaser.Math.Clamp(this.y, 0, this.scene.game.config.height);
+    if (this.getData("isShooting")) {
+      if (this.getData("timerShootTick") < this.getData("timerShootDelay")) {
+        this.setData("timerShootTick", this.getData("timerShootTick") + 1); // every game update, increase timerShootTick by one until we reach the value of timerShootDelay
+      }
+      else { // when the "manual timer" is triggered:
+        var laser = new PlayerLaser(this.scene, this.x, this.y);
+        this.scene.playerLasers.add(laser);
+
+        this.scene.sfx.laser.play(); // play the laser sound effect
+        this.setData("timerShootTick", 0);
+      }
+    }
   }
 }
 
@@ -53,6 +65,13 @@ class CarrierShip extends Entity {
     super(scene, x, y, "sprEnemy2", "CarrierShip");
     this.body.velocity.y = Phaser.Math.Between(50, 100);
     this.play("sprEnemy2");
+  }
+}
+
+class PlayerLaser extends Entity {
+  constructor(scene, x, y) {
+    super(scene, x, y, "sprLaserPlayer");
+    this.body.velocity.y = -200;
   }
 }
 
@@ -93,4 +112,4 @@ class CarrierShip extends Entity {
   }
 }
 
-export {ScrollingBackground,Player,Entity,ChaserShip,GunShip,CarrierShip};
+export {ScrollingBackground,Player,PlayerLaser,Entity,ChaserShip,GunShip,CarrierShip};

@@ -6,15 +6,15 @@ class SceneMain extends Phaser.Scene {
   }
   preload() {
 
-    this.load.image("sprLaserPlayer", "img/sprLaserPlayer.png");
-    this.load.spritesheet("sprPlayer", "img/playerShip.png", {
-      frameWidth: 16,
-      frameHeight: 16
+    this.load.image("sprLaserPlayer", "img/sprLaserPlayer2.png");
+    this.load.spritesheet("sprPlayer", "img/player.png", {
+      frameWidth: 45,
+      frameHeight: 45
     });
 
-    this.load.audio("sndExplode0", "content/sndExplode0.wav");
-    this.load.audio("sndExplode1", "content/sndExplode1.wav");
-    this.load.audio("sndLaser", "content/sndLaser.wav");
+    this.load.audio("sndExplode0", "img/sndExplode0.wav");
+    this.load.audio("sndExplode1", "img/sndExplode1.wav");
+    this.load.audio("sndLaser", "img/sndLaser.wav");
   }
   create() {
     // this.anims.create({
@@ -41,20 +41,20 @@ class SceneMain extends Phaser.Scene {
       frameRate: 20,
       repeat: -1
     });
-    // this.sfx = {
-    //   explosions: [
-    //     this.sound.add("sndExplode0"),
-    //     this.sound.add("sndExplode1")
-    //   ],
-    //   laser: this.sound.add("sndLaser")
-    // };
-    // this.sfx.laser.play();
-    // this.player = new Player(
-    //   this,
-    //   this.game.config.width * 0.5,
-    //   this.game.config.height * 0.5,
-    //   "sprPlayer"
-    // );
+    this.sfx = {
+      explosions: [
+        this.sound.add("sndExplode0"),
+        this.sound.add("sndExplode1")
+      ],
+      laser: this.sound.add("sndLaser")
+    };
+    this.sfx.laser.play();
+    this.player = new Player(
+      this,
+      this.game.config.width * 0.5,
+      this.game.config.height * 0.5,
+      "sprPlayer"
+    );
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -85,31 +85,32 @@ class SceneMain extends Phaser.Scene {
       var bg = new ScrollingBackground(this, key, i * 10);
       this.backgrounds.push(bg);
     }
-    this.player = new Player(
-      this,
-      this.game.config.width * 0.5,
-      this.game.config.height * 0.5,
-      "sprPlayer"
-    );
     console.log(this.player);
   }
   update() {
-    for (var i = 0; i < this.backgrounds.length; i++) {
-      this.backgrounds[i].update();
-    }
+    if (!this.player.getData("isDead")) {
       this.player.update();
       if (this.keyW.isDown) {
         this.player.moveUp();
       }
-      if (this.keyS.isDown) {
+      else if (this.keyS.isDown) {
         this.player.moveDown();
       }
       if (this.keyA.isDown) {
         this.player.moveLeft();
       }
-       if (this.keyD.isDown) {
-        this.player.x += 4;
+      else if (this.keyD.isDown) {
+        this.player.x +=4;
       }
+
+      if (this.keySpace.isDown) {
+        this.player.setData("isShooting", true);
+      }
+      else {
+        this.player.setData("timerShootTick", this.player.getData("timerShootDelay") - 1);
+        this.player.setData("isShooting", false);
+      }
+    }
   }
 }
 
