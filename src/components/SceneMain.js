@@ -81,7 +81,7 @@ class SceneMain extends Phaser.Scene {
     this.playerLasers = this.add.group();
 
     this.time.addEvent({
-      delay:2500,
+      delay:1500,
       callback: function() {
         var enemy = null;
 
@@ -91,7 +91,7 @@ class SceneMain extends Phaser.Scene {
             Phaser.Math.Between(0, this.game.config.width),
             0
           );
-        } else if (Phaser.Math.Between(0, 10) >= 5) {
+        } else if (Phaser.Math.Between(0, 10) >= 3) {
           if (this.getEnemiesByType('ChaserShip').length < 5) {
             enemy = new ChaserShip(
               this,
@@ -108,7 +108,7 @@ class SceneMain extends Phaser.Scene {
         }
 
         if (enemy !== null) {
-          enemy.setScale(Phaser.Math.Between(10, 20) * 0.1);
+          enemy.setScale(Phaser.Math.Between(10, 15) * 0.1);
           this.enemies.add(enemy);
         }
       },
