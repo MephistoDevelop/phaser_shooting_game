@@ -5,11 +5,15 @@ class SceneMain extends Phaser.Scene {
     super({ key: 'SceneMain' });
   }
   preload() {
+    this.load.spritesheet('sprExplosion', 'img/sprExplosion.png', {
+      frameWidth: 32,
+      frameHeight: 32
+    });
     this.load.image("sprLaserPlayer", "img/sprLaserPlayer2.png");
     this.load.image('sprEnemy3', 'img/Enemy4.png');
-    this.load.spritesheet("sprPlayer", "img/player.png", {
-      frameWidth: 45,
-      frameHeight: 45
+    this.load.spritesheet("sprPlayer", "img/player2.png", {
+      frameWidth: 38,
+      frameHeight: 38
     });
     this.load.spritesheet('sprEnemy0', 'img/Enemy.png', {
       frameWidth: 30,
@@ -29,19 +33,6 @@ class SceneMain extends Phaser.Scene {
     this.load.audio("sndLaser", "img/sndLaser.wav");
   }
   create() {
-
-    this.anims.create({
-      key: "sprEnemy2",
-      frames: this.anims.generateFrameNumbers("sprEnemy2"),
-      frameRate: 20,
-      repeat: -1
-    });
-    // this.anims.create({
-    //   key: "sprExplosion",
-    //   frames: this.anims.generateFrameNumbers("sprExplosion"),
-    //   frameRate: 20,
-    //   repeat: 0
-    // });
     this.anims.create({
       key: "sprPlayer",
       frames: this.anims.generateFrameNumbers("sprPlayer"),
@@ -54,6 +45,21 @@ class SceneMain extends Phaser.Scene {
       frames: this.anims.generateFrameNumbers("sprEnemy0"),
       frameRate: 20,
       repeat: -1
+    });
+
+    this.anims.create({
+      key: "sprEnemy2",
+      frames: this.anims.generateFrameNumbers("sprEnemy2"),
+      frameRate: 20,
+      repeat: -1
+    });
+
+
+    this.anims.create({
+      key: "sprExplosion",
+      frames: this.anims.generateFrameNumbers("sprExplosion"),
+      frameRate: 20,
+      repeat: 0
     });
 
     this.sfx = {
@@ -77,7 +83,7 @@ class SceneMain extends Phaser.Scene {
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.enemies = this.add.group();
-    // this.enemyLasers = this.add.group();
+    this.enemyLasers = this.add.group();
     this.playerLasers = this.add.group();
 
     this.time.addEvent({
@@ -116,6 +122,30 @@ class SceneMain extends Phaser.Scene {
       loop: true
     });
 
+    this.physics.add.collider(this.playerLasers, this.enemies, function(
+      playerLaser,
+      enemy
+    ) {
+      if (enemy) {
+        if (enemy.onDestroy !== undefined) {
+          enemy.onDestroy();
+        }
+        enemy.explode(true);
+        playerLaser.destroy();
+      }
+    });
+
+    this.physics.add.overlap(this.player, this.enemies, function(
+      player,
+      enemy
+    ) {
+      if (!player.getData('isDead') && !enemy.getData('isDead')) {
+        player.explode(false);
+        player.onDestroy();
+        enemy.explode(true);
+      }
+    });
+
 
     this.backgrounds = [];
     for (var i = 0; i < 5; i++) {
@@ -125,11 +155,12 @@ class SceneMain extends Phaser.Scene {
       this.backgrounds.push(bg);
     }
     console.log(this.player);
+
     this.points=0;
     this.title = this.add.text(
       this.game.config.width * 1,
       128,
-      `Points: ${this.points}`,
+      `Score: ${this.points}`,
       {
         fontFamily: 'roboto',
         fontSize: 22,
@@ -152,6 +183,17 @@ class SceneMain extends Phaser.Scene {
     return arr;
   }
 
+  onDestroy() {
+    this.scene.time.addEvent({
+      // go to game over scene
+      delay: 1000,
+      callback: function() {
+        this.scene.scene.start('SceneGameOver');
+      },
+      callbackScope: this,
+      loop: false
+    });
+  }
 
   update() {
 
@@ -172,7 +214,7 @@ class SceneMain extends Phaser.Scene {
 
       if (this.keySpace.isDown) {
         this.points+=300;
-        this.title.setText(`Points: ${this.points}`);
+        this.title.setText(`Score: ${this.points}`);
         this.title.setOrigin(3.1,4.8);
         this.player.setData("isShooting", true);
       }
@@ -181,6 +223,41 @@ class SceneMain extends Phaser.Scene {
         this.player.setData("isShooting", false);
       }
     }
+
+    for (var i = 0; i < this.enemies.getChildren().length; i++) {
+      var enemy = this.enemies.getChildren()[i];
+      enemy.update();
+      if (
+        enemy.x < -enemy.displayWidth ||
+        enemy.x > this.game.config.width + enemy.displayWidth ||
+        enemy.y < -enemy.displayHeight * 4 ||
+        enemy.y > this.game.config.height + enemy.displayHeight
+      ) {
+        if (enemy) {
+          if (enemy.onDestroy !== undefined) {
+            enemy.onDestroy();
+          }
+          enemy.destroy();
+        }
+      }
+    }
+
+
+    for (var i = 0; i < this.playerLasers.getChildren().length; i++) {
+      var laser = this.playerLasers.getChildren()[i];
+      laser.update();
+      if (
+        laser.x < -laser.displayWidth ||
+        laser.x > this.game.config.width + laser.displayWidth ||
+        laser.y < -laser.displayHeight * 4 ||
+        laser.y > this.game.config.height + laser.displayHeight
+      ) {
+        if (laser) {
+          laser.destroy();
+        }
+      }
+    }
+
   }
 }
 

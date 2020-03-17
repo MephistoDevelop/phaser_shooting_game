@@ -55,7 +55,7 @@ class SceneMainMenu extends Phaser.Scene {
     this.title = this.add.text(
       this.game.config.width * 0.5,
       128,
-      "SPACE SHIP'S ATTACK",
+      "MEPHISTO'S ATTACK",
       {
         fontFamily: 'monospace',
         fontSize: 32,
