@@ -125,6 +125,20 @@ class SceneMain extends Phaser.Scene {
       this.backgrounds.push(bg);
     }
     console.log(this.player);
+    this.points=0;
+    this.title = this.add.text(
+      this.game.config.width * 1,
+      128,
+      `Points: ${this.points}`,
+      {
+        fontFamily: 'roboto',
+        fontSize: 22,
+        fontStyle: 'bold',
+        color: 'white',
+        align: 'center'
+      }
+    );
+    this.title.setOrigin(5,4.8);
   }
 
   getEnemiesByType(type) {
@@ -138,7 +152,9 @@ class SceneMain extends Phaser.Scene {
     return arr;
   }
 
+
   update() {
+
     if (!this.player.getData("isDead")) {
       this.player.update();
       if (this.keyW.isDown) {
@@ -155,6 +171,9 @@ class SceneMain extends Phaser.Scene {
       }
 
       if (this.keySpace.isDown) {
+        this.points+=300;
+        this.title.setText(`Points: ${this.points}`);
+        this.title.setOrigin(3.1,4.8);
         this.player.setData("isShooting", true);
       }
       else {
