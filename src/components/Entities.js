@@ -89,31 +89,107 @@ class Entity extends Phaser.GameObjects.Sprite {
   }
 }
 
-class ChaserShip extends Entity {
-  constructor(scene, x, y) {
-    super(scene, x, y, "sprEnemy1", "ChaserShip");
-    this.body.velocity.y = Phaser.Math.Between(50, 100);
-  }
-}
-class GunShip extends Entity {
-  constructor(scene, x, y) {
-    super(scene, x, y, "sprEnemy0", "GunShip");
-    this.body.velocity.y = Phaser.Math.Between(50, 100);
-    this.play("sprEnemy0");
-  }
-}
-class CarrierShip extends Entity {
-  constructor(scene, x, y) {
-    super(scene, x, y, "sprEnemy2", "CarrierShip");
-    this.body.velocity.y = Phaser.Math.Between(50, 100);
-    this.play("sprEnemy2");
-  }
-}
 
 class PlayerLaser extends Entity {
   constructor(scene, x, y) {
     super(scene, x, y, "sprLaserPlayer");
     this.body.velocity.y = -200;
+  }
+}
+
+class EnemyLaser extends Entity {
+  constructor(scene, x, y) {
+    super(scene, x, y, "sprLaserEnemy0");
+    this.body.velocity.y = 200;
+  }
+}
+
+class ChaserShip extends Entity {
+  constructor(scene, x, y) {
+    super(scene, x, y, "sprEnemy1", "ChaserShip");
+
+    this.body.velocity.y = Phaser.Math.Between(50, 100);
+
+    this.states = {
+      MOVE_DOWN: "MOVE_DOWN",
+      CHASE: "CHASE"
+    };
+    this.state = this.states.MOVE_DOWN;
+  }
+
+  update() {
+    if (!this.getData("isDead") && this.scene.player) {
+      if (Phaser.Math.Distance.Between(
+        this.x,
+        this.y,
+        this.scene.player.x,
+        this.scene.player.y
+      ) < 320) {
+
+        this.state = this.states.CHASE;
+      }
+
+      if (this.state == this.states.CHASE) {
+        var dx = this.scene.player.x - this.x;
+        var dy = this.scene.player.y - this.y;
+
+        var angle = Math.atan2(dy, dx);
+
+        var speed = 100;
+        this.body.setVelocity(
+          Math.cos(angle) * speed,
+          Math.sin(angle) * speed
+        );
+
+        if (this.x < this.scene.player.x) {
+          this.angle -= 5;
+        }
+        else {
+          this.angle += 5;
+        }
+      }
+    }
+  }
+}
+
+class GunShip extends Entity {
+  constructor(scene, x, y) {
+    super(scene, x, y, "sprEnemy0", "GunShip");
+    this.play("sprEnemy0");
+
+    this.body.velocity.y = Phaser.Math.Between(50, 100);
+
+    this.shootTimer = this.scene.time.addEvent({
+      delay: 1000,
+      callback: function() {
+        var laser = new EnemyLaser(
+          this.scene,
+          this.x,
+          this.y
+        );
+        laser.setScale(this.scaleX);
+        this.scene.enemyLasers.add(laser);
+      },
+      callbackScope: this,
+      loop: true
+    });
+  }
+
+  onDestroy() {
+    if (this.shootTimer !== undefined) {
+      if (this.shootTimer) {
+        this.shootTimer.remove(false);
+      }
+    }
+  }
+}
+
+class CarrierShip extends Entity {
+  constructor(scene, x, y) {
+    super(scene, x, y, "sprEnemy2", "CarrierShip");
+    this.play("sprEnemy2");
+
+    this.body.velocity.y = Phaser.Math.Between(50, 100);
   }
 }
 
@@ -129,12 +205,12 @@ class PlayerLaser extends Entity {
   }
 
   createLayers() {
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < 1; i++) {
       // creating two backgrounds will allow a continuous flow giving the illusion that they are moving.
       var layer = this.scene.add.sprite(0, 0, this.key);
       layer.y = (layer.displayHeight * i);
-      var flipX = Phaser.Math.Between(0, 10) >= 5 ? -1 : 1;
-      var flipY = Phaser.Math.Between(0, 10) >= 5 ? -1 : 1;
+      var flipX = Phaser.Math.Between(0, 10) >= 1 ? -1 : 1;
+      var flipY = Phaser.Math.Between(0, 10) >= 1 ? -1 : 1;
       layer.setScale(flipX * 2, flipY * 2);
       layer.setDepth(-5 - (i - 1));
       this.scene.physics.world.enableBody(layer, 0);

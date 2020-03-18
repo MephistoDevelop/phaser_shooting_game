@@ -1,6 +1,7 @@
 import SceneMainMenu from './components/SceneMainMenu';
 import SceneMain from './components/SceneMain';
 import SceneGameOver from './components/SceneGameOver';
+import SceneName from './components/SceneName';
 import '../src/components/Entities';
 
 var config = {
@@ -14,7 +15,7 @@ var config = {
       gravity: { x: 0, y: 0 }
     }
   },
-  scene: [SceneMainMenu, SceneMain, SceneGameOver],
+  scene: [SceneMainMenu,SceneName, SceneMain, SceneGameOver],
   pixelArt: true,
   roundPixels: true
 };

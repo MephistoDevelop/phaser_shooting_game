@@ -28,6 +28,7 @@ class SceneMain extends Phaser.Scene {
       frameHeight: 22
     });
 
+    this.load.image("sprLaserEnemy0", "img/sprLaserEnemy0.png");
     this.load.audio("sndExplode0", "img/sndExplode0.wav");
     this.load.audio("sndExplode1", "img/sndExplode1.wav");
     this.load.audio("sndLaser", "img/sndLaser.wav");
@@ -241,8 +242,20 @@ class SceneMain extends Phaser.Scene {
         }
       }
     }
-
-
+    for (var i = 0; i < this.enemyLasers.getChildren().length; i++) {
+      var laser = this.enemyLasers.getChildren()[i];
+      laser.update();
+      if (
+        laser.x < -laser.displayWidth ||
+        laser.x > this.game.config.width + laser.displayWidth ||
+        laser.y < -laser.displayHeight * 4 ||
+        laser.y > this.game.config.height + laser.displayHeight
+      ) {
+        if (laser) {
+          laser.destroy();
+        }
+      }
+    }
     for (var i = 0; i < this.playerLasers.getChildren().length; i++) {
       var laser = this.playerLasers.getChildren()[i];
       laser.update();
@@ -257,6 +270,7 @@ class SceneMain extends Phaser.Scene {
         }
       }
     }
+
 
   }
 }

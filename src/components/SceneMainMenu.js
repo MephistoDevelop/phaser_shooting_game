@@ -4,8 +4,9 @@ class SceneMainMenu extends Phaser.Scene {
     super({ key: 'SceneMainMenu' });
   }
   preload() {
-    this.load.image('sprBg0', 'img/sprBg0.png');
-    this.load.image('sprBg1', 'img/sprBg1.png');
+    this.load.image('sprLogo', 'img/logo2.png');
+    this.load.image('sprBg0', 'img/space.png');
+    this.load.image('sprBg1', 'img/space.png');
     this.load.image('sprBtnPlay', 'img/sprBtnPlay.png');
     this.load.image('sprBtnPlayHover', 'img/sprBtnPlayHover.png');
     this.load.image('sprBtnPlayDown', 'img/sprBtnPlayDown.png');
@@ -21,6 +22,11 @@ class SceneMainMenu extends Phaser.Scene {
       btnOver: this.sound.add('sndBtnOver'),
       btnDown: this.sound.add('sndBtnDown')
     };
+    this.logo = this.add.sprite(
+      this.game.config.width * 0.5,
+      this.game.config.height * 0.5,
+      'sprLogo');
+      this.logo.setOrigin(0.5,1.5);
 
     this.btnPlay = this.add.sprite(
       this.game.config.width * 0.5,
@@ -52,28 +58,28 @@ class SceneMainMenu extends Phaser.Scene {
       this.scene.start("SceneMain");
     }, this);
 
-    this.title = this.add.text(
-      this.game.config.width * 0.5,
-      128,
-      "MEPHISTO'S ATTACK",
-      {
-        fontFamily: 'monospace',
-        fontSize: 32,
-        fontStyle: 'bold',
-        color: 'white',
-        align: 'center'
-      }
-    );
-    this.title.setOrigin(0.5);
+
+    // this.title = this.add.text(
+    //   this.game.config.width * 0.5,
+    //   128,
+    //   "MEPHISTO'S ATTACK",
+    //   {
+    //     fontFamily: 'monospace',
+    //     fontSize: 32,
+    //     fontStyle: 'bold',
+    //     color: 'white',
+    //     align: 'center'
+    //   }
+    // );
+    // this.title.setOrigin(0.5);
 
     this.backgrounds = [];
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 1; i++) {
       var keys = ['sprBg0', 'sprBg1'];
       var key = keys[Phaser.Math.Between(0, keys.length - 1)];
       var bg = new ScrollingBackground(this, key, i * 10);
       this.backgrounds.push(bg);
     }
-
   }
   update() {
     for (var i = 0; i < this.backgrounds.length; i++) {
