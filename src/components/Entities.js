@@ -160,7 +160,7 @@ class GunShip extends Entity {
     this.body.velocity.y = Phaser.Math.Between(50, 100);
 
     this.shootTimer = this.scene.time.addEvent({
-      delay: 1000,
+      delay: 1500,
       callback: function() {
         var laser = new EnemyLaser(
           this.scene,

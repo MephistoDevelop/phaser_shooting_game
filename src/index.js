@@ -9,6 +9,9 @@ var config = {
   width: 480,
   height: 640,
   backgroundColor: 'none',
+  dom: {
+    createContainer: true
+},
   physics: {
     default: 'arcade',
     arcade: {

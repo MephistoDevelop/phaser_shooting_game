@@ -1,36 +1,79 @@
+import{ ScrollingBackground} from './Entities';
+export let playerName='';
 class SceneName extends Phaser.Scene {
   constructor() {
       super('SceneName');
   }
-  preload() {}
-  create() {
-      this.formUtil = new FormUtil({
-          scene: this,
-          rows: 11,
-          cols: 11
+  preload() {
+      const nameBox = document.createElement('input');
+      nameBox.id = 'nameBox';
+      nameBox.type = 'input'
+      nameBox.placeholder = 'Player Name'
+      document.getElementById('content').appendChild(nameBox);
+
+      this.load.image('sprBtnPlay', 'img/sprBtnPlay.png');
+      this.load.image('sprBtnPlayHover', 'img/sprBtnPlayHover.png');
+      this.load.image('sprBtnPlayDown', 'img/sprBtnPlayDown.png');
+      this.load.image('sprBg0', 'img/space.png');
+      this.load.image('sprBg1', 'img/space.png');
+  }
+
+  create ()
+  {
+    this.sfx = {
+        btnOver: this.sound.add('sndBtnOver'),
+        btnDown: this.sound.add('sndBtnDown')
+      };
+    this.btnPlay = this.add.sprite(
+        this.game.config.width * 0.5,
+        this.game.config.height * 0.5,
+        'sprBtnPlay'
+      );
+      this.btnPlay.setInteractive();
+
+      this.btnPlay.on(
+        'pointerover',
+        function() {
+          this.btnPlay.setTexture('sprBtnPlayHover'); // set the button texture to sprBtnPlayHover
+          this.sfx.btnOver.play(); // play the button over sound
+        },
+        this
+      );
+
+      this.btnPlay.on('pointerout', function() {
+        this.setTexture('sprBtnPlay');
       });
-      this.formUtil.showNumbers();
-      //
-      //
-      //
-      this.formUtil.scaleToGameW("myText", .3);
-      this.formUtil.placeElementAt(16, 'myText', true);
-      //
-      //
-      //
-      this.formUtil.scaleToGameW("area51", .8);
-      this.formUtil.scaleToGameH("area51", .5);
-      this.formUtil.placeElementAt(60, "area51", true, true);
-      this.formUtil.addChangeCallback("area51", this.textAreaChanged, this);
-      //
-      //
-      //
+
+      this.btnPlay.on("pointerdown", function() {
+        this.btnPlay.setTexture("sprBtnPlayDown");
+        this.sfx.btnDown.play();
+      }, this);
+
+      this.btnPlay.on("pointerup", function() {
+        this.btnPlay.setTexture("sprBtnPlay");
+        playerName = document.getElementById('nameBox').value;
+        console.log(playerName);
+        this.scene.start("SceneMain",{name: playerName});
+        document.getElementById('nameBox').outerHTML = "";
+
+      }, this);
+
+
+
+    this.backgrounds = [];
+    for (var i = 0; i < 1; i++) {
+      var keys = ['sprBg0', 'sprBg1'];
+      var key = keys[Phaser.Math.Between(0, keys.length - 1)];
+      var bg = new ScrollingBackground(this, key, i * 10);
+      this.backgrounds.push(bg);
+    }
   }
-  textAreaChanged() {
-      var text = this.formUtil.getTextAreaValue("area51");
-      console.log(text);
-  }
-  update() {}
+
+ update() {
+    for (var i = 0; i < this.backgrounds.length; i++) {
+        this.backgrounds[i].update();
+      }
+ }
 }
 
 export default SceneName;

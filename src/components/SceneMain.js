@@ -4,7 +4,18 @@ class SceneMain extends Phaser.Scene {
   constructor() {
     super({ key: 'SceneMain' });
   }
+  init(data){
+    console.log('init', data);
+    this.name = (data.name === '') ? 'Player': data.name;
+}
+
   preload() {
+    this.points=0;
+    const scoreLabel =document.createElement('div');
+    scoreLabel.innerHTML = `${this.name} <-> Score: ${this.points}`
+    scoreLabel.id = 'score-lbl';
+    document.getElementById('content').appendChild(scoreLabel);
+
     this.load.spritesheet('sprExplosion', 'img/sprExplosion.png', {
       frameWidth: 32,
       frameHeight: 32
@@ -19,9 +30,9 @@ class SceneMain extends Phaser.Scene {
       frameWidth: 30,
       frameHeight: 30
     });
-    this.load.spritesheet('sprEnemy1', 'img/Enemy2.png', {
-      frameWidth: 18,
-      frameHeight: 18
+    this.load.spritesheet('sprEnemy1', 'img/ovni.png', {
+      frameWidth: 25,
+      frameHeight: 25
     });
     this.load.spritesheet('sprEnemy2', 'img/Enemy3.png', {
       frameWidth: 22,
@@ -88,7 +99,7 @@ class SceneMain extends Phaser.Scene {
     this.playerLasers = this.add.group();
 
     this.time.addEvent({
-      delay:1500,
+      delay:1000,
       callback: function() {
         var enemy = null;
 
@@ -115,7 +126,7 @@ class SceneMain extends Phaser.Scene {
         }
 
         if (enemy !== null) {
-          enemy.setScale(Phaser.Math.Between(10, 15) * 0.1);
+          enemy.setScale(Phaser.Math.Between(15, 20) * 0.1);
           this.enemies.add(enemy);
         }
       },
@@ -155,22 +166,6 @@ class SceneMain extends Phaser.Scene {
       var bg = new ScrollingBackground(this, key, i * 10);
       this.backgrounds.push(bg);
     }
-    console.log(this.player);
-
-    this.points=0;
-    this.title = this.add.text(
-      this.game.config.width * 1,
-      128,
-      `Score: ${this.points}`,
-      {
-        fontFamily: 'roboto',
-        fontSize: 22,
-        fontStyle: 'bold',
-        color: 'white',
-        align: 'center'
-      }
-    );
-    this.title.setOrigin(5,4.8);
   }
 
   getEnemiesByType(type) {
@@ -215,8 +210,7 @@ class SceneMain extends Phaser.Scene {
 
       if (this.keySpace.isDown) {
         this.points+=300;
-        this.title.setText(`Score: ${this.points}`);
-        this.title.setOrigin(3.1,4.8);
+        document.getElementById('score-lbl').innerHTML = `${this.name} <-> Score: ${this.points}`,
         this.player.setData("isShooting", true);
       }
       else {
