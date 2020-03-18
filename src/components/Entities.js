@@ -18,7 +18,7 @@ class Entity extends Phaser.GameObjects.Sprite {
         Phaser.Math.Between(0, this.scene.sfx.explosions.length - 1)
       ].play();
       if (this.shootTimer !== undefined) {
-        if (this.shootTimer) {
+       if (this.shootTimer) {
           this.shootTimer.remove(false);
         }
       }

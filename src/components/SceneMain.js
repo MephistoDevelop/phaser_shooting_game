@@ -7,15 +7,32 @@ class SceneMain extends Phaser.Scene {
   init(data){
     console.log('init', data);
     this.name = (data.name === '') ? 'Player': data.name;
+    this.life = null;
+    this.life2 = null;
+    this.life3 = null;
+    this.lifeCount = 3;
+    this.points=0;
 }
 
   preload() {
-    this.points=0;
     const scoreLabel =document.createElement('div');
     scoreLabel.innerHTML = `${this.name} <-> Score: ${this.points}`
     scoreLabel.id = 'score-lbl';
     document.getElementById('content').appendChild(scoreLabel);
 
+
+    this.load.spritesheet('sprLife', 'img/life.png', {
+      frameWidth: 25,
+      frameHeight: 25
+    });
+    this.load.spritesheet('sprLife1', 'img/life.png', {
+      frameWidth: 25,
+      frameHeight: 25
+    });
+    this.load.spritesheet('sprLife2', 'img/life.png', {
+      frameWidth: 25,
+      frameHeight: 25
+    });
     this.load.spritesheet('sprExplosion', 'img/sprExplosion.png', {
       frameWidth: 32,
       frameHeight: 32
@@ -45,6 +62,11 @@ class SceneMain extends Phaser.Scene {
     this.load.audio("sndLaser", "img/sndLaser.wav");
   }
   create() {
+
+    this.life=this.add.sprite(455,30, 'sprLife');
+  this.life2=this.add.sprite(425,30, 'sprLife1');
+    this.life3=this.add.sprite(395,30, 'sprLife2');
+
     this.anims.create({
       key: "sprPlayer",
       frames: this.anims.generateFrameNumbers("sprPlayer"),
@@ -65,7 +87,6 @@ class SceneMain extends Phaser.Scene {
       frameRate: 20,
       repeat: -1
     });
-
 
     this.anims.create({
       key: "sprExplosion",
@@ -89,6 +110,8 @@ class SceneMain extends Phaser.Scene {
       this.game.config.height * 0.5,
       "sprPlayer"
     );
+
+
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -147,15 +170,14 @@ class SceneMain extends Phaser.Scene {
       }
     });
 
+    console.log(`Soy lifeCount: ${this.lifeCount} --life: ${this.life}`);
+    this.player.setData('count',this.lifeCount);
     this.physics.add.overlap(this.player, this.enemies, function(
       player,
       enemy
     ) {
-      if (!player.getData('isDead') && !enemy.getData('isDead')) {
+        player.setData('count',player.getData('count')-1);
         player.explode(false);
-        player.onDestroy();
-        enemy.explode(true);
-      }
     });
 
 
@@ -179,6 +201,61 @@ class SceneMain extends Phaser.Scene {
     return arr;
   }
 
+  onDie(){
+
+    if(this.player.getData('count')===2){
+
+      this.life.destroy();
+      this.player = new Player(
+        this,
+        this.game.config.width * 0.5,
+        this.game.config.height * 0.5,
+        "sprPlayer"
+      );
+      this.physics.add.overlap(this.player, this.enemies, function(
+        player,
+        enemy
+      ) {
+          player.setData('count',player.getData('count')-1);
+          player.explode(false);
+          player.setData('count',1);
+      });
+      // this.player.setData('count',2);
+      console.log(`Soy player.Count: : ${this.player.getData('count')} -- ${this.lifeCount}`);
+
+      // this.physics.add.overlap(this.player, this.enemies, function(
+      //   player,
+      //   enemy
+      // ) {
+      //     player.setData('count',player.getData('count')-1);
+      //     player.explode(false);
+      // });
+
+    }
+    if(this.player.getData('count')===1){
+      this.life2.destroy();
+      this.player = new Player(
+        this,
+        this.game.config.width * 0.5,
+        this.game.config.height * 0.5,
+        "sprPlayer"
+      );
+      this.physics.add.overlap(this.player, this.enemies, function(
+        player,
+        enemy
+      ) {
+          player.setData('count',player.getData('count')-1);
+          player.explode(false);
+          player.setData('count',0);
+      });
+
+    }
+    if(this.player.getData('count')===0){
+      this.life3.destroy();
+    }
+
+  }
+
   onDestroy() {
     this.scene.time.addEvent({
       // go to game over scene
@@ -192,7 +269,7 @@ class SceneMain extends Phaser.Scene {
   }
 
   update() {
-
+    this.onDie()
     if (!this.player.getData("isDead")) {
       this.player.update();
       if (this.keyW.isDown) {
@@ -264,7 +341,6 @@ class SceneMain extends Phaser.Scene {
         }
       }
     }
-
 
   }
 }
