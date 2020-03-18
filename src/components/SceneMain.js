@@ -247,6 +247,10 @@ class SceneMain extends Phaser.Scene {
           player.setData('count',player.getData('count')-1);
           player.explode(false);
           player.setData('count',0);
+
+    player.explode(true);
+    player.onDestroy();
+
       });
 
     }
