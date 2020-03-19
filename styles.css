@@ -2,11 +2,26 @@ body {
   display: flex !important;
   justify-content: center !important;
 }
+.item-score {
+  font-size: 23px;
+  color: whitesmoke;
+  border-bottom: 3px solid whitesmoke;
+  margin: 20px 0px;
+  padding: 5px 0;
+}
+#content {
+  min-height: 293px;
+  overflow-y: auto;
+  top: 23%;
+  position: absolute;
+  width: 30%;
+}
 #nameBox {
   position: absolute;
-  left: 38%;
+  left: 10%;
   top: 38%;
   width: 23%;
+  min-width: 300px;
   background-color: transparent;
   border: 4px solid rgb(115, 112, 112);
   color: white;
@@ -32,10 +47,76 @@ body {
   border-radius: 2%;
 }
 #score-lbl {
-  position: absolute;
+  position: fixed;
   color: white;
   font-size: 18px;
-  left: 34%;
+  left: 33%;
   font-weight: 600;
   top: 4%;
+}
+.item-container {
+  color: white;
+  display: flex;
+  width: 85%;
+  justify-content: center;
+}
+
+#userTitle {
+  margin-left: 13%;
+  margin-right: 43%;
+}
+.userText {
+  margin-right: 28%;
+  margin-left: 6%;
+  margin-bottom: 3%;
+  width: 37%;
+}
+@media screen and (min-width: 510px) and (max-width: 1000px) {
+  #nameBox {
+    left: 15%;
+    width: 74%;
+  }
+  #score-lbl {
+    left: 15%;
+  }
+  #score-title-container {
+    position: absolute;
+    font-weight: 800;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width: 57%;
+    top: 21%;
+    font-size: 22px;
+    border-bottom: 5px solid white;
+    margin: 3% 56px;
+    padding: 8px 1%;
+  }
+  #userTitle {
+    margin-right: 36%;
+    margin-left: 19%;
+  }
+  #items-container {
+    width: 90%;
+    left: 8%;
+    top: 35%;
+    position: absolute;
+    max-height: 500px;
+    overflow: auto;
+  }
+  #item-container {
+    width: 90%;
+    left: 8%;
+    top: 39%;
+    position: absolute;
+  }
+
+  .userText {
+    margin-right: 30%;
+    width: 15%;
+    margin-bottom: 10px;
+  }
+  #content {
+    width: 65%;
+  }
 }
