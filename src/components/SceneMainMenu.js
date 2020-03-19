@@ -22,11 +22,24 @@ class SceneMainMenu extends Phaser.Scene {
       btnOver: this.sound.add('sndBtnOver'),
       btnDown: this.sound.add('sndBtnDown')
     };
-    this.logo = this.add.sprite(
-      this.game.config.width * 0.5,
-      this.game.config.height * 0.5,
-      'sprLogo');
-      this.logo.setOrigin(0.5,1.5);
+
+    this.addLogo();
+      this.addButton();
+      this.setBackground();
+  }
+  update() {
+    for (var i = 0; i < this.backgrounds.length; i++) {
+      this.backgrounds[i].update();
+    }
+  }
+addLogo(){
+  this.logo = this.add.sprite(
+    this.game.config.width * 0.5,
+    this.game.config.height * 0.5,
+    'sprLogo');
+    this.logo.setOrigin(0.5,1.5);
+}
+  addButton(){
 
     this.btnPlay = this.add.sprite(
       this.game.config.width * 0.5,
@@ -37,42 +50,28 @@ class SceneMainMenu extends Phaser.Scene {
 
     this.btnPlay.on(
       'pointerover',
-      function() {
+        ( )=>{
         this.btnPlay.setTexture('sprBtnPlayHover'); // set the button texture to sprBtnPlayHover
         this.sfx.btnOver.play(); // play the button over sound
       },
       this
     );
 
-    this.btnPlay.on('pointerout', function() {
+    this.btnPlay.on('pointerout', ()=> {
       this.setTexture('sprBtnPlay');
     });
 
-    this.btnPlay.on("pointerdown", function() {
+    this.btnPlay.on("pointerdown", ()=> {
       this.btnPlay.setTexture("sprBtnPlayDown");
       this.sfx.btnDown.play();
     }, this);
 
-    this.btnPlay.on("pointerup", function() {
+    this.btnPlay.on("pointerup", ()=> {
       this.btnPlay.setTexture("sprBtnPlay");
       this.scene.start("SceneName");
     }, this);
-
-
-    // this.title = this.add.text(
-    //   this.game.config.width * 0.5,
-    //   128,
-    //   "MEPHISTO'S ATTACK",
-    //   {
-    //     fontFamily: 'monospace',
-    //     fontSize: 32,
-    //     fontStyle: 'bold',
-    //     color: 'white',
-    //     align: 'center'
-    //   }
-    // );
-    // this.title.setOrigin(0.5);
-
+  }
+  setBackground(){
     this.backgrounds = [];
     for (var i = 0; i < 1; i++) {
       var keys = ['sprBg0', 'sprBg1'];
@@ -81,11 +80,7 @@ class SceneMainMenu extends Phaser.Scene {
       this.backgrounds.push(bg);
     }
   }
-  update() {
-    for (var i = 0; i < this.backgrounds.length; i++) {
-      this.backgrounds[i].update();
-    }
-  }
+
 }
 
 export default SceneMainMenu;
