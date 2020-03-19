@@ -209,7 +209,7 @@ class SceneMain extends Phaser.Scene {
       this.player = new Player(
         this,
         this.game.config.width * 0.5,
-        this.game.config.height * 0.5,
+        this.game.config.height * 0.9,
         "sprPlayer"
       );
       this.physics.add.overlap(this.player, this.enemies, function(
@@ -220,16 +220,6 @@ class SceneMain extends Phaser.Scene {
           player.explode(false);
           player.setData('count',1);
       });
-      // this.player.setData('count',2);
-      console.log(`Soy player.Count: : ${this.player.getData('count')} -- ${this.lifeCount}`);
-
-      // this.physics.add.overlap(this.player, this.enemies, function(
-      //   player,
-      //   enemy
-      // ) {
-      //     player.setData('count',player.getData('count')-1);
-      //     player.explode(false);
-      // });
 
     }
     if(this.player.getData('count')===1){
@@ -237,7 +227,7 @@ class SceneMain extends Phaser.Scene {
       this.player = new Player(
         this,
         this.game.config.width * 0.5,
-        this.game.config.height * 0.5,
+        this.game.config.height * 0.9,
         "sprPlayer"
       );
       this.physics.add.overlap(this.player, this.enemies, function(
@@ -256,6 +246,7 @@ class SceneMain extends Phaser.Scene {
     }
     if(this.player.getData('count')===0){
       this.life3.destroy();
+
     }
 
   }
@@ -290,8 +281,6 @@ class SceneMain extends Phaser.Scene {
       }
 
       if (this.keySpace.isDown) {
-        this.points+=300;
-        document.getElementById('score-lbl').innerHTML = `${this.name} <-> Score: ${this.points}`,
         this.player.setData("isShooting", true);
       }
       else {

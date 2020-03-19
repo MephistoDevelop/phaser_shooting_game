@@ -26,6 +26,10 @@ Javascript project [Original Page Project](https://www.notion.so/Shooter-game-20
 
 To use this project you will need to download this repository and save in your computer.
 
+https://www.npmjs.com/package/axios
+
+"Game with ID: WNZPvrWyhiH0BNFD0WAo , to get scores from API Web Page."
+
 ### Deployment
 
 steps to run the webpage on the browser:
@@ -61,3 +65,5 @@ This project is [MIT](lic.url) licensed.
 ### Authors:
 
 - [Cristian Ines (MephistoDevelop)](https://github.com/MephistoDevelop)
+
+- Design Images by: https://es.cooltext.com
