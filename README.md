@@ -55,7 +55,7 @@ Intructions:
 - If your ship are touched by a Enemy you will lose one life
 - If your ship are touched by a Laser Enemy you will lose one life
 
-- If the player loses 3 lifes the Game End and we can see our Name on the Scoreboard
+- If the player loses 3 lives the Game End and we can see our Name on the Scoreboard
 
 ### Setup
 

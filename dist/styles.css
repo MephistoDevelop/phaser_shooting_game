@@ -87,16 +87,15 @@ body {
     color: white;
     display: flex;
     flex-direction: column;
-    width: 57%;
-    top: 21%;
+    width: 67%;
+    top: -8%;
     font-size: 22px;
-    border-bottom: 5px solid white;
     margin: 3% 56px;
-    padding: 8px 1%;
+    padding: 25px 2%;
   }
   #userTitle {
-    margin-right: 36%;
-    margin-left: 19%;
+    margin-right: 22%;
+    margin-left: 23%;
   }
   #items-container {
     width: 90%;

@@ -59,13 +59,8 @@ class SceneName extends Phaser.Scene {
       function() {
         this.btnPlay.setTexture('sprBtnPlay');
         playerName = document.getElementById('nameBox').value;
-        this.scene.start("SceneMain",{name: playerName});
-        document.getElementById('nameBox').outerHTML = "";
-
-        // var url =
-        //   'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/WNZPvrWyhiH0BNFD0WAo/scores/';
-
-        // this.getDataAxios(url);
+        this.scene.start('SceneMain', { name: playerName });
+        document.getElementById('nameBox').outerHTML = '';
       },
       this
     );
@@ -84,17 +79,12 @@ class SceneName extends Phaser.Scene {
       this.backgrounds[i].update();
     }
   }
+
   getDataAxios(url) {
     const response = axios.post(url, {
-      user: "Robert",
+      user: 'Robert',
       score: 34500
     });
-    console.log(response);
-    // const response = axios.get(
-    //   'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games',
-    //   { headers: { 'Content-Type': 'application/json' } }
-    // );
-    // for (const obj in response.data) booksFetched.push(response.data[obj]);
   }
 }
 

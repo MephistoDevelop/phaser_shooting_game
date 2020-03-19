@@ -1,11 +1,11 @@
 import {ScrollingBackground,Player,Enemy,ChaserShip,GunShip,CarrierShip} from './Entities';
+import axios from 'axios';
 
 class SceneMain extends Phaser.Scene {
   constructor() {
     super({ key: 'SceneMain' });
   }
   init(data){
-    console.log('init', data);
     this.name = (data.name === '') ? 'Player': data.name;
     this.life = null;
     this.life2 = null;
@@ -123,7 +123,7 @@ class SceneMain extends Phaser.Scene {
 
     this.time.addEvent({
       delay:1000,
-      callback: function() {
+      callback: () => {
         var enemy = null;
 
         if (Phaser.Math.Between(0, 10) >= 3) {
@@ -157,31 +157,31 @@ class SceneMain extends Phaser.Scene {
       loop: true
     });
 
-    this.physics.add.collider(this.playerLasers, this.enemies, function(
+    this.physics.add.collider(this.playerLasers, this.enemies, (
       playerLaser,
       enemy
-    ) {
+    ) => {
       if (enemy) {
         if (enemy.onDestroy !== undefined) {
           enemy.onDestroy();
         }
         enemy.explode(false);
         playerLaser.destroy();
-       // player.setData('count',player.getData('count')-1);
+        this.upScore();
       }
     });
 
-    this.physics.add.overlap(this.player, this.enemyLasers, function(player, laser) {
+    this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
       player.setData('count',player.getData('count')-1);
       player.explode(false);
     });
 
 
     this.player.setData('count',this.lifeCount);
-    this.physics.add.overlap(this.player, this.enemies, function(
+    this.physics.add.overlap(this.player, this.enemies, (
       player,
       enemy
-    ) {
+    ) => {
         player.setData('count',player.getData('count')-1);
         player.explode(false);
     });
@@ -218,16 +218,16 @@ class SceneMain extends Phaser.Scene {
         this.game.config.height * 0.9,
         "sprPlayer"
       );
-      this.physics.add.overlap(this.player, this.enemies, function(
+      this.physics.add.overlap(this.player, this.enemies,(
         player,
         enemy
-      ) {
+      ) => {
           player.setData('count',player.getData('count')-1);
           player.explode(false);
           player.setData('count',1);
       });
 
-      this.physics.add.overlap(this.player, this.enemyLasers, function(player, laser) {
+      this.physics.add.overlap(this.player, this.enemyLasers,(player, laser) => {
         player.setData('count',player.getData('count')-1);
         player.explode(false);
         player.setData('count',1);
@@ -242,23 +242,25 @@ class SceneMain extends Phaser.Scene {
         this.game.config.height * 0.9,
         "sprPlayer"
       );
-      this.physics.add.overlap(this.player, this.enemies, function(
+      this.physics.add.overlap(this.player, this.enemies, (
         player,
         enemy
-      ) {
+      ) => {
+          if(this.points > 0) sendScore('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/WNZPvrWyhiH0BNFD0WAo/scores/',this.name,this.points);
+
           player.setData('count',player.getData('count')-1);
           player.explode(false);
           player.setData('count',0);
-
-    player.explode(true);
-    player.onDestroy();
-
+          player.explode(true);
+          player.onDestroy();
       });
 
-      this.physics.add.overlap(this.player, this.enemyLasers, function(player, laser) {
+      this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
         player.setData('count',player.getData('count')-1);
         player.explode(false);
         player.setData('count',0);
+        player.explode(true);
+        player.onDestroy();
       });
 
     }
@@ -273,7 +275,7 @@ class SceneMain extends Phaser.Scene {
     this.scene.time.addEvent({
       // go to game over scene
       delay: 1000,
-      callback: function() {
+      callback: () => {
         this.scene.scene.start('SceneGameOver');
       },
       callbackScope: this,
@@ -354,6 +356,19 @@ class SceneMain extends Phaser.Scene {
     }
 
   }
+  upScore(){
+    const scoreLabel = document.getElementById('score-lbl')
+    scoreLabel.innerHTML = `${this.name} <-> Score: ${this.points}`
+    this.points += 350
+  }
 }
 
+ function sendScore(url, name = 'Player', points) {
+   console.log('PLayer'+name +' - '+points);
+  const response =  axios.post(url, {
+    user: name,
+    score: points
+  });
+  console.log(response);
+}
 export default SceneMain;
