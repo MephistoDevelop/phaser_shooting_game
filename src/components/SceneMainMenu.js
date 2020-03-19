@@ -1,4 +1,4 @@
-import{ ScrollingBackground} from './Entities';
+import { ScrollingBackground } from './Entities';
 class SceneMainMenu extends Phaser.Scene {
   constructor() {
     super({ key: 'SceneMainMenu' });
@@ -22,25 +22,27 @@ class SceneMainMenu extends Phaser.Scene {
       btnOver: this.sound.add('sndBtnOver'),
       btnDown: this.sound.add('sndBtnDown')
     };
-
     this.addLogo();
-      this.addButton();
-      this.setBackground();
+    this.addButton();
+    this.setBackground();
   }
+
   update() {
     for (var i = 0; i < this.backgrounds.length; i++) {
       this.backgrounds[i].update();
     }
   }
-addLogo(){
-  this.logo = this.add.sprite(
-    this.game.config.width * 0.5,
-    this.game.config.height * 0.5,
-    'sprLogo');
-    this.logo.setOrigin(0.5,1.5);
-}
-  addButton(){
 
+  addLogo() {
+    this.logo = this.add.sprite(
+      this.game.config.width * 0.5,
+      this.game.config.height * 0.5,
+      'sprLogo'
+    );
+    this.logo.setOrigin(0.5, 1.5);
+  }
+
+  addButton() {
     this.btnPlay = this.add.sprite(
       this.game.config.width * 0.5,
       this.game.config.height * 0.5,
@@ -50,28 +52,37 @@ addLogo(){
 
     this.btnPlay.on(
       'pointerover',
-        ( )=>{
+      () => {
         this.btnPlay.setTexture('sprBtnPlayHover'); // set the button texture to sprBtnPlayHover
         this.sfx.btnOver.play(); // play the button over sound
       },
       this
     );
 
-    this.btnPlay.on('pointerout', ()=> {
+    this.btnPlay.on('pointerout', () => {
       this.setTexture('sprBtnPlay');
     });
 
-    this.btnPlay.on("pointerdown", ()=> {
-      this.btnPlay.setTexture("sprBtnPlayDown");
-      this.sfx.btnDown.play();
-    }, this);
+    this.btnPlay.on(
+      'pointerdown',
+      () => {
+        this.btnPlay.setTexture('sprBtnPlayDown');
+        this.sfx.btnDown.play();
+      },
+      this
+    );
 
-    this.btnPlay.on("pointerup", ()=> {
-      this.btnPlay.setTexture("sprBtnPlay");
-      this.scene.start("SceneName");
-    }, this);
+    this.btnPlay.on(
+      'pointerup',
+      () => {
+        this.btnPlay.setTexture('sprBtnPlay');
+        this.scene.start('SceneName');
+      },
+      this
+    );
   }
-  setBackground(){
+
+  setBackground() {
     this.backgrounds = [];
     for (var i = 0; i < 1; i++) {
       var keys = ['sprBg0', 'sprBg1'];
@@ -80,7 +91,6 @@ addLogo(){
       this.backgrounds.push(bg);
     }
   }
-
 }
 
 export default SceneMainMenu;

@@ -93,6 +93,7 @@ class SceneGameOver extends Phaser.Scene {
       this
     );
   }
+
   init() {
     this.getScore();
   }
