@@ -94,6 +94,8 @@ class SceneGameOver extends Phaser.Scene{
       this.btnRestart.on("pointerup", function() {
         this.btnRestart.setTexture("sprBtnRestart");
         this.scene.start("SceneName");
+        document.getElementById('score-title-container').remove();
+        document.getElementById('items-container').remove();
       }, this);
 
 

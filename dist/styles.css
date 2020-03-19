@@ -57,12 +57,14 @@ body {
 .item-container {
   color: white;
   display: flex;
+  font-size: 17px;
   width: 85%;
+  font-weight: 800;
   justify-content: center;
 }
 
 #userTitle {
-  margin-left: 13%;
+  margin-left: 11%;
   margin-right: 43%;
 }
 .userText {

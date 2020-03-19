@@ -165,12 +165,18 @@ class SceneMain extends Phaser.Scene {
         if (enemy.onDestroy !== undefined) {
           enemy.onDestroy();
         }
-        enemy.explode(true);
+        enemy.explode(false);
         playerLaser.destroy();
+       // player.setData('count',player.getData('count')-1);
       }
     });
 
-    console.log(`Soy lifeCount: ${this.lifeCount} --life: ${this.life}`);
+    this.physics.add.overlap(this.player, this.enemyLasers, function(player, laser) {
+      player.setData('count',player.getData('count')-1);
+      player.explode(false);
+    });
+
+
     this.player.setData('count',this.lifeCount);
     this.physics.add.overlap(this.player, this.enemies, function(
       player,
@@ -221,6 +227,12 @@ class SceneMain extends Phaser.Scene {
           player.setData('count',1);
       });
 
+      this.physics.add.overlap(this.player, this.enemyLasers, function(player, laser) {
+        player.setData('count',player.getData('count')-1);
+        player.explode(false);
+        player.setData('count',1);
+      });
+
     }
     if(this.player.getData('count')===1){
       this.life2.destroy();
@@ -241,6 +253,12 @@ class SceneMain extends Phaser.Scene {
     player.explode(true);
     player.onDestroy();
 
+      });
+
+      this.physics.add.overlap(this.player, this.enemyLasers, function(player, laser) {
+        player.setData('count',player.getData('count')-1);
+        player.explode(false);
+        player.setData('count',0);
       });
 
     }
