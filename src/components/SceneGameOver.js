@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable comma-dangle */
+// eslint-disable import/no-unresolved, import/no-extraneous-dependencies.
 import axios from 'axios';
 import { ScrollingBackground } from './Entities';
 
