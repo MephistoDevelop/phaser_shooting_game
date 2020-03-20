@@ -107,4 +107,4 @@ This project is [MIT](lic.url) licensed.
 
 - [Cristian Ines (MephistoDevelop)](https://github.com/MephistoDevelop)
 
-- Design Images Sprites by: https://es.cooltext.com
+- Design Images Sprites by:[CoolText.com](https://es.cooltext.com)
