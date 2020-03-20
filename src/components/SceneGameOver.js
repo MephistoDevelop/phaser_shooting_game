@@ -20,18 +20,18 @@ class SceneGameOver extends Phaser.Scene {
       itemsContainer.id = 'items-container';
       element.id = 'score-title-container';
       element.innerHTML = '<div class="item-score"><span id="userTitle">User  '
-        +'</span>  <span id="scoreTitle">Score '
+        + '</span>  <span id="scoreTitle">Score '
         + '</span></div>';
       document.getElementById('content').appendChild(element);
       document.getElementById('content').appendChild(itemsContainer);
       for (let i = 0; i <= scoreArray.length; i += 1) {
         const element = document.createElement('div');
         element.className = 'item-container';
-        element.innerHTML = '<span class="userText">'
-          +scoreArray[i].user
-          +'</span>  <span class="scoreText"> '
-          +scoreArray[i].score
-          +'</span>';
+        element.innerHTML = `<span class="userText">
+          ${scoreArray[i].user}
+          </span>  <span class="scoreText">
+          ${scoreArray[i].score}
+          </span>`;
         document.getElementById('items-container').appendChild(element);
       }
     });
@@ -41,17 +41,16 @@ class SceneGameOver extends Phaser.Scene {
     const score = document.createElement('div');
     score.id = 'score-container';
     document.getElementById('score-lbl').remove();
-    const url =
-      'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/';
+    const url ='https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/';
     this.getDataAxios(url);
   }
 
   setBackground() {
     this.backgrounds = [];
-    for (let i = 0; i < 5; i+=1) {
+    for (let i = 0; i < 5; i += 1) {
       const keys = ['sprBg0', 'sprBg1'];
       const key = keys[Phaser.Math.Between(0, keys.length - 1)];
-      let bg = new ScrollingBackground(this, key, i * 10);
+      const bg = new ScrollingBackground(this, key, i * 10);
       this.backgrounds.push(bg);
     }
   }
