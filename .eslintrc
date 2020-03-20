@@ -12,6 +12,10 @@
     "browser": true
   },
   "rules": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
     "no-global-assign": [
       "error",
       {
