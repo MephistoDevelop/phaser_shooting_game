@@ -1,24 +1,25 @@
 /* eslint-disable no-undef */
 /* eslint-disable comma-dangle */
-import {ScrollingBackground,Player,Enemy,ChaserShip,GunShip,CarrierShip} from './Entities';
 import axios from 'axios';
+import { ScrollingBackground, Player, ChaserShip, GunShip,CarrierShip } from './Entities';
 
 class SceneMain extends Phaser.Scene {
   constructor() {
     super({ key: 'SceneMain' });
   }
-  init(data){
-    this.name = (data.name === '') ? 'Player': data.name;
+
+  init(data) {
+    this.name = (data.name === '') ? 'Player' : data.name;
     this.life = null;
     this.life2 = null;
     this.life3 = null;
     this.lifeCount = 3;
-    this.points=0;
+    this.points = 0;
 }
 
   preload() {
     const scoreLabel = document.createElement('div');
-    scoreLabel.innerHTML = `${this.name} <-> Score: ${this.points}`
+    scoreLabel.innerHTML = `${this.name} <-> Score: ${this.points}`;
     scoreLabel.id = 'score-lbl';
     document.getElementById('content').appendChild(scoreLabel);
 
@@ -27,32 +28,39 @@ class SceneMain extends Phaser.Scene {
       frameWidth: 25,
       frameHeight: 25
     });
+
     this.load.spritesheet('sprLife1', 'img/life.png', {
       frameWidth: 25,
       frameHeight: 25
     });
+
     this.load.spritesheet('sprLife2', 'img/life.png', {
       frameWidth: 25,
       frameHeight: 25
     });
+
     this.load.spritesheet('sprExplosion', 'img/sprExplosion.png', {
       frameWidth: 32,
       frameHeight: 32
     });
+
     this.load.image('sprLaserPlayer', 'img/sprLaserPlayer2.png');
     this.load.image('sprEnemy3', 'img/Enemy4.png');
     this.load.spritesheet('sprPlayer', 'img/player2.png', {
       frameWidth: 38,
       frameHeight: 38
     });
+
     this.load.spritesheet('sprEnemy0', 'img/Enemy.png', {
       frameWidth: 30,
       frameHeight: 30
     });
+
     this.load.spritesheet('sprEnemy1', 'img/ovni.png', {
       frameWidth: 25,
       frameHeight: 25
     });
+
     this.load.spritesheet('sprEnemy2', 'img/Enemy3.png', {
       frameWidth: 22,
       frameHeight: 22
@@ -65,9 +73,8 @@ class SceneMain extends Phaser.Scene {
   }
 
   create() {
-
     this.life = this.add.sprite(455,30, 'sprLife');
-  this.life2 = this.add.sprite(425,30, 'sprLife1');
+    this.life2 = this.add.sprite(425,30, 'sprLife1');
     this.life3 = this.add.sprite(395,30, 'sprLife2');
 
     this.anims.create({
@@ -191,10 +198,10 @@ class SceneMain extends Phaser.Scene {
 
 
     this.backgrounds = [];
-    for(let i = 0; i < 5; i+=1) {
+    for(let i = 0; i < 5;  i+= 1) {
       const keys = ['sprBg0', 'sprBg1'];
       const key = keys[Phaser.Math.Between(0, keys.length - 1)];
-      let bg = new ScrollingBackground(this, key, i * 10);
+      const bg = new ScrollingBackground(this, key, i * 10);
       this.backgrounds.push(bg);
     }
   }
@@ -275,9 +282,9 @@ class SceneMain extends Phaser.Scene {
 
   getEnemiesByType(type) {
     let arr = [];
-    for (let i = 0; i < this.enemies.getChildren().length; i++) {
+    for (let i = 0; i < this.enemies.getChildren().length; i += 1) {
       let enemy = this.enemies.getChildren()[i];
-      if (enemy.getData('type') == type) {
+      if (enemy.getData('type') === type) {
         arr.push(enemy);
       }
     }
