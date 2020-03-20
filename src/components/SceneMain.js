@@ -321,8 +321,8 @@ class SceneMain extends Phaser.Scene {
         player,
         enemy
       ) => {
-          if(this.points > 0) sendScore('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/WNZPvrWyhiH0BNFD0WAo/scores/',this.name,this.points);
-
+          if(this.points > 0) sendScore('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/CdfMzIr7OI42mSFqoSZG/scores/',this.name,this.points);
+        console.log('Axios: '+this.name + ' - '+this.points)
           player.setData('count',player.getData('count')-1);
           player.explode(false);
           player.setData('count',0);

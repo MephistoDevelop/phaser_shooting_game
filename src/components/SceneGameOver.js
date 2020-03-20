@@ -5,6 +5,7 @@ class SceneGameOver extends Phaser.Scene {
   constructor() {
     super({ key: 'SceneGameOver' });
   }
+
   getDataAxios(url) {
     const response = axios.get(url, {
       headers: { 'Content-Type': 'application/json' }
@@ -34,14 +35,16 @@ class SceneGameOver extends Phaser.Scene {
       }
     });
   }
+
   getScore() {
     const score = document.createElement('div');
     score.id = 'score-container';
     document.getElementById('score-lbl').remove();
     var url =
-      'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/WNZPvrWyhiH0BNFD0WAo/scores/';
+      'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/CdfMzIr7OI42mSFqoSZG/scores/';
     this.getDataAxios(url);
   }
+
   setBackground() {
     this.backgrounds = [];
     for (var i = 0; i < 5; i++) {
@@ -51,10 +54,11 @@ class SceneGameOver extends Phaser.Scene {
       this.backgrounds.push(bg);
     }
   }
+
   setButton() {
     this.btnRestart = this.add.sprite(
       this.game.config.width * 0.5,
-      this.game.config.height * 0.7,
+      this.game.config.height * 0.8,
       'sprBtnRestart'
     );
 
@@ -97,12 +101,14 @@ class SceneGameOver extends Phaser.Scene {
   init() {
     this.getScore();
   }
+
   preload() {
     this.load.image('sprOver', 'img/game-over.png');
     this.load.image('sprBtnRestart', 'img/sprBtnRestart.png');
     this.load.image('sprBtnRestartHover', 'img/sprBtnRestartHover.png');
     this.load.image('sprBtnRestartDown', 'img/sprBtnRestartDown.png');
   }
+
   create() {
     this.sfx = {
       btnOver: this.sound.add('sndBtnOver'),

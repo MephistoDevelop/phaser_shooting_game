@@ -103,7 +103,6 @@ body {
     top: 35%;
     position: absolute;
     max-height: 500px;
-    overflow: auto;
   }
   #item-container {
     width: 90%;
