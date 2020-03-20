@@ -1,7 +1,11 @@
 /* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 /* eslint-disable comma-dangle */
+/* eslint-disable no-use-before-define */
 import axios from 'axios';
-import { ScrollingBackground, Player, ChaserShip, GunShip,CarrierShip } from './Entities';
+import {
+  ScrollingBackground, Player, ChaserShip, GunShip, CarrierShip
+} from './Entities';
 
 class SceneMain extends Phaser.Scene {
   constructor() {
@@ -15,7 +19,7 @@ class SceneMain extends Phaser.Scene {
     this.life3 = null;
     this.lifeCount = 3;
     this.points = 0;
-}
+  }
 
   preload() {
     const scoreLabel = document.createElement('div');
@@ -73,9 +77,9 @@ class SceneMain extends Phaser.Scene {
   }
 
   create() {
-    this.life = this.add.sprite(455,30, 'sprLife');
-    this.life2 = this.add.sprite(425,30, 'sprLife1');
-    this.life3 = this.add.sprite(395,30, 'sprLife2');
+    this.life = this.add.sprite(455, 30, 'sprLife');
+    this.life2 = this.add.sprite(425, 30, 'sprLife1');
+    this.life3 = this.add.sprite(395, 30, 'sprLife2');
 
     this.anims.create({
       key: 'sprPlayer',
@@ -132,7 +136,7 @@ class SceneMain extends Phaser.Scene {
     this.playerLasers = this.add.group();
 
     this.time.addEvent({
-      delay:1000,
+      delay: 1000,
       callback: () => {
         let enemy = null;
 
@@ -182,23 +186,23 @@ class SceneMain extends Phaser.Scene {
     });
 
     this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
-      player.setData('count',player.getData('count')-1);
+      player.setData('count', player.getData('count') - 1);
       player.explode(false);
     });
 
 
-    this.player.setData('count',this.lifeCount);
+    this.player.setData('count', this.lifeCount);
     this.physics.add.overlap(this.player, this.enemies, (
       player,
       enemy
     ) => {
-        player.setData('count',player.getData('count')-1);
-        player.explode(false);
+      player.setData('count', player.getData('count') - 1);
+      player.explode(false);
     });
 
 
     this.backgrounds = [];
-    for(let i = 0; i < 5;  i+= 1) {
+    for (let i = 0; i < 5; i += 1) {
       const keys = ['sprBg0', 'sprBg1'];
       const key = keys[Phaser.Math.Between(0, keys.length - 1)];
       const bg = new ScrollingBackground(this, key, i * 10);
@@ -207,39 +211,36 @@ class SceneMain extends Phaser.Scene {
   }
 
   update() {
-    this.onDie()
+    this.onDie();
     if (!this.player.getData('isDead')) {
       this.player.update();
       if (this.keyW.isDown) {
         this.player.moveUp();
-      }
-      else if (this.keyS.isDown) {
+      } else if (this.keyS.isDown) {
         this.player.moveDown();
       }
       if (this.keyA.isDown) {
         this.player.moveLeft();
-      }
-      else if (this.keyD.isDown) {
-        this.player.x +=4;
+      } else if (this.keyD.isDown) {
+        this.player.x += 4;
       }
 
       if (this.keySpace.isDown) {
         this.player.setData('isShooting', true);
-      }
-      else {
-        this.player.setData('timerShootTick', this.player.getData('timerShootDelay') +200);
+      } else {
+        this.player.setData('timerShootTick', this.player.getData('timerShootDelay') + 200);
         this.player.setData('isShooting', false);
       }
     }
 
-    for (let i = 0; i < this.enemies.getChildren().length; i+=1) {
-      let enemy = this.enemies.getChildren()[i];
+    for (let i = 0; i < this.enemies.getChildren().length; i += 1) {
+      const enemy = this.enemies.getChildren()[i];
       enemy.update();
       if (
-        enemy.x < -enemy.displayWidth ||
-        enemy.x > this.game.config.width + enemy.displayWidth ||
-        enemy.y < -enemy.displayHeight * 4 ||
-        enemy.y > this.game.config.height + enemy.displayHeight
+        enemy.x < -enemy.displayWidth
+        || enemy.x > this.game.config.width + enemy.displayWidth
+        || enemy.y < -enemy.displayHeight * 4
+        || enemy.y > this.game.config.height + enemy.displayHeight
       ) {
         if (enemy) {
           if (enemy.onDestroy !== undefined) {
@@ -249,41 +250,40 @@ class SceneMain extends Phaser.Scene {
         }
       }
     }
-    for (let i = 0; i < this.enemyLasers.getChildren().length; i+=1) {
-      let laser = this.enemyLasers.getChildren()[i];
+    for (let i = 0; i < this.enemyLasers.getChildren().length; i += 1) {
+      const laser = this.enemyLasers.getChildren()[i];
       laser.update();
       if (
-        laser.x < -laser.displayWidth ||
-        laser.x > this.game.config.width + laser.displayWidth ||
-        laser.y < -laser.displayHeight * 4 ||
-        laser.y > this.game.config.height + laser.displayHeight
+        laser.x < -laser.displayWidth
+        || laser.x > this.game.config.width + laser.displayWidth
+        || laser.y < -laser.displayHeight * 4
+        || laser.y > this.game.config.height + laser.displayHeight
       ) {
         if (laser) {
           laser.destroy();
         }
       }
     }
-    for (let i = 0; i < this.playerLasers.getChildren().length; i+=1) {
-      let laser = this.playerLasers.getChildren()[i];
+    for (let i = 0; i < this.playerLasers.getChildren().length; i += 1) {
+      const laser = this.playerLasers.getChildren()[i];
       laser.update();
       if (
-        laser.x < -laser.displayWidth ||
-        laser.x > this.game.config.width + laser.displayWidth ||
-        laser.y < -laser.displayHeight * 4 ||
-        laser.y > this.game.config.height + laser.displayHeight
+        laser.x < -laser.displayWidth
+        || laser.x > this.game.config.width + laser.displayWidth
+        || laser.y < -laser.displayHeight * 4
+        || laser.y > this.game.config.height + laser.displayHeight
       ) {
         if (laser) {
           laser.destroy();
         }
       }
     }
-
   }
 
   getEnemiesByType(type) {
-    let arr = [];
+    const arr = [];
     for (let i = 0; i < this.enemies.getChildren().length; i += 1) {
-      let enemy = this.enemies.getChildren()[i];
+      const enemy = this.enemies.getChildren()[i];
       if (enemy.getData('type') === type) {
         arr.push(enemy);
       }
@@ -291,10 +291,8 @@ class SceneMain extends Phaser.Scene {
     return arr;
   }
 
-  onDie(){
-
-    if(this.player.getData('count')===2){
-
+  onDie() {
+    if (this.player.getData('count') === 2) {
       this.life.destroy();
       this.player = new Player(
         this,
@@ -302,23 +300,22 @@ class SceneMain extends Phaser.Scene {
         this.game.config.height * 0.9,
         'sprPlayer'
       );
-      this.physics.add.overlap(this.player, this.enemies,(
+      this.physics.add.overlap(this.player, this.enemies, (
         player,
         enemy
       ) => {
-          player.setData('count',player.getData('count')-1);
-          player.explode(false);
-          player.setData('count',1);
-      });
-
-      this.physics.add.overlap(this.player, this.enemyLasers,(player, laser) => {
-        player.setData('count',player.getData('count')-1);
+        player.setData('count', player.getData('count') - 1);
         player.explode(false);
-        player.setData('count',1);
+        player.setData('count', 1);
       });
 
+      this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
+        player.setData('count', player.getData('count') - 1);
+        player.explode(false);
+        player.setData('count', 1);
+      });
     }
-    if(this.player.getData('count')===1){
+    if (this.player.getData('count') === 1) {
       this.life2.destroy();
       this.player = new Player(
         this,
@@ -330,43 +327,38 @@ class SceneMain extends Phaser.Scene {
         player,
         enemy
       ) => {
-
-        console.log('Axios: '+this.name + ' - '+this.points)
-          player.setData('count',player.getData('count')-1);
-          player.explode(false);
-          player.setData('count',0);
-          if(this.points > 0) sendScore('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/',this.name,this.points);
-          this.points=0;
-          player.explode(true);
-          player.onDestroy();
-      });
-
-      this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
-        player.setData('count',player.getData('count')-1);
+        player.setData('count', player.getData('count') - 1);
         player.explode(false);
-        player.setData('count',0);
-        if(this.points > 0) sendScore('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/',this.name,this.points);
-        this.points=0;
+        player.setData('count', 0);
+        if (this.points > 0) sendScore('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/', this.name, this.points);
+        this.points = 0;
         player.explode(true);
         player.onDestroy();
       });
 
+      this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
+        player.setData('count', player.getData('count') - 1);
+        player.explode(false);
+        player.setData('count', 0);
+        if (this.points > 0) sendScore('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/', this.name, this.points);
+        this.points = 0;
+        player.explode(true);
+        player.onDestroy();
+      });
     }
-    if(this.player.getData('count')===0){
+    if (this.player.getData('count') === 0) {
       this.life3.destroy();
 
-    this.keyW = this.input.keyboard.clearCaptures();
-    this.keyS = this.input.keyboard.clearCaptures();
-    this.keyA = this.input.keyboard.clearCaptures();
-    this.keyD = this.input.keyboard.clearCaptures();
-    this.keySpace = this.input.keyboard.clearCaptures();
+      this.keyW = this.input.keyboard.clearCaptures();
+      this.keyS = this.input.keyboard.clearCaptures();
+      this.keyA = this.input.keyboard.clearCaptures();
+      this.keyD = this.input.keyboard.clearCaptures();
+      this.keySpace = this.input.keyboard.clearCaptures();
     }
-
   }
 
   onDestroy() {
     this.scene.time.addEvent({
-      // go to game over scene
       delay: 1000,
       callback: () => {
         this.scene.scene.start('SceneGameOver');
@@ -376,18 +368,16 @@ class SceneMain extends Phaser.Scene {
     });
   }
 
-  upScore(){
-    const scoreLabel = document.getElementById('score-lbl')
-    scoreLabel.innerHTML = `${this.name} <-> Score: ${this.points}`
-    this.points += 350
+  upScore() {
+    const scoreLabel = document.getElementById('score-lbl');
+    scoreLabel.innerHTML = `${this.name} <-> Score: ${this.points}`;
+    this.points += 350;
   }
 }
- const sendScore =(url, name = 'Player', points) => {
-   console.log('PLayer'+name +' - '+points);
-  const response =  axios.post(url, {
+const sendScore = (url, name = 'Player', points) => {
+  const response = axios.post(url, {
     user: name,
     score: points
   });
-  console.log(response);
-}
+};
 export default SceneMain;

@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable comma-dangle */
+/* eslint-disable no-use-before-define */
 class Entity extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, key, type) {
     super(scene, x, y, key);
@@ -74,6 +75,7 @@ class Player extends Entity {
       loop: false
     });
   }
+
   update() {
     this.body.setVelocity(0, 0);
     this.x = Phaser.Math.Clamp(this.x, 0, this.scene.game.config.width);
@@ -136,9 +138,9 @@ class ChaserShip extends Entity {
         const dx = this.scene.player.x - this.x;
         const dy = this.scene.player.y - this.y;
 
-        let angle = Math.atan2(dy, dx);
+        const angle = Math.atan2(dy, dx);
 
-        let speed = 100;
+        const speed = 100;
         this.body.setVelocity(Math.cos(angle) * speed, Math.sin(angle) * speed);
 
         if (this.x < this.scene.player.x) {
@@ -200,7 +202,7 @@ class ScrollingBackground {
   }
 
   createLayers() {
-    for (let i = 0; i < 1; i+=1) {
+    for (let i = 0; i < 1; i += 1) {
       const layer = this.scene.add.sprite(0, 0, this.key);
       layer.y = layer.displayHeight * i;
       const flipX = Phaser.Math.Between(0, 10) >= 1 ? -1 : 1;
@@ -216,7 +218,7 @@ class ScrollingBackground {
 
   update() {
     if (this.layers.getChildren()[0].y > 0) {
-      for (let i = 0; i < this.layers.getChildren().length; i+=1) {
+      for (let i = 0; i < this.layers.getChildren().length; i += 1) {
         const layer = this.layers.getChildren()[i];
         layer.y = -layer.displayHeight + layer.displayHeight * i;
       }
