@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable comma-dangle */
 import { ScrollingBackground } from './Entities';
 
 class SceneMainMenu extends Phaser.Scene {

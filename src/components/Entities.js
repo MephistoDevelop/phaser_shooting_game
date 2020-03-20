@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable comma-dangle */
 class Entity extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, key, type) {
     super(scene, x, y, key);
