@@ -6,6 +6,7 @@ class SceneMainMenu extends Phaser.Scene {
   constructor() {
     super({ key: 'SceneMainMenu' });
   }
+
   preload() {
     this.load.image('sprLogo', 'img/logo2.png');
     this.load.image('sprBg0', 'img/space.png');
@@ -31,7 +32,7 @@ class SceneMainMenu extends Phaser.Scene {
   }
 
   update() {
-    for (var i = 0; i < this.backgrounds.length; i++) {
+    for (let i = 0; i < this.backgrounds.length; i += 1) {
       this.backgrounds[i].update();
     }
   }
@@ -87,10 +88,10 @@ class SceneMainMenu extends Phaser.Scene {
 
   setBackground() {
     this.backgrounds = [];
-    for (var i = 0; i < 1; i++) {
-      var keys = ['sprBg0', 'sprBg1'];
-      var key = keys[Phaser.Math.Between(0, keys.length - 1)];
-      var bg = new ScrollingBackground(this, key, i * 10);
+    for (let i = 0; i < 1; i += 1) {
+      const keys = ['sprBg0', 'sprBg1'];
+      const key = keys[Phaser.Math.Between(0, keys.length - 1)];
+      const bg = new ScrollingBackground(this, key, i * 10);
       this.backgrounds.push(bg);
     }
   }

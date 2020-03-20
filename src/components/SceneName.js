@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable comma-dangle */
+/* eslint-disable class-methods-use-this */
 import { ScrollingBackground } from './Entities';
 import axios from 'axios';
 
@@ -8,6 +9,7 @@ class SceneName extends Phaser.Scene {
   constructor() {
     super('SceneName');
   }
+
   preload() {
     const nameBox = document.createElement('input');
     nameBox.id = 'nameBox';
@@ -36,20 +38,20 @@ class SceneName extends Phaser.Scene {
 
     this.btnPlay.on(
       'pointerover',
-      function() {
+      () => {
         this.btnPlay.setTexture('sprBtnPlayHover'); // set the button texture to sprBtnPlayHover
         this.sfx.btnOver.play(); // play the button over sound
       },
       this
     );
 
-    this.btnPlay.on('pointerout', function() {
+    this.btnPlay.on('pointerout', () => {
       this.setTexture('sprBtnPlay');
     });
 
     this.btnPlay.on(
       'pointerdown',
-      function() {
+      () => {
         this.btnPlay.setTexture('sprBtnPlayDown');
         this.sfx.btnDown.play();
       },
@@ -58,7 +60,7 @@ class SceneName extends Phaser.Scene {
 
     this.btnPlay.on(
       'pointerup',
-      function() {
+      () => {
         this.btnPlay.setTexture('sprBtnPlay');
         playerName = document.getElementById('nameBox').value;
         this.scene.start('SceneMain', { name: playerName });
@@ -68,22 +70,22 @@ class SceneName extends Phaser.Scene {
     );
 
     this.backgrounds = [];
-    for (var i = 0; i < 1; i++) {
-      var keys = ['sprBg0', 'sprBg1'];
-      var key = keys[Phaser.Math.Between(0, keys.length - 1)];
-      var bg = new ScrollingBackground(this, key, i * 10);
+    for (let i = 0; i < 1; i += 1) {
+      const keys = ['sprBg0', 'sprBg1'];
+      const key = keys[Phaser.Math.Between(0, keys.length - 1)];
+      const bg = new ScrollingBackground(this, key, i * 10);
       this.backgrounds.push(bg);
     }
   }
 
   update() {
-    for (var i = 0; i < this.backgrounds.length; i++) {
+    for (let i = 0; i < this.backgrounds.length; i += 1) {
       this.backgrounds[i].update();
     }
   }
 
   getDataAxios(url) {
-    const response = axios.post(url, {
+    axios.post(url, {
       user: 'Robert',
       score: 34500
     });
