@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 /* eslint-disable comma-dangle */
 /* eslint-disable class-methods-use-this */
-import { ScrollingBackground } from './Entities';
 import axios from 'axios';
+import { ScrollingBackground } from './Entities';
 
-export let playerName = '';
+export const playerName = '';
 class SceneName extends Phaser.Scene {
   constructor() {
     super('SceneName');

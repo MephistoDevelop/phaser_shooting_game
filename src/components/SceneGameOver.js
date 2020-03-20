@@ -41,7 +41,7 @@ class SceneGameOver extends Phaser.Scene {
     const score = document.createElement('div');
     score.id = 'score-container';
     document.getElementById('score-lbl').remove();
-    const url ='https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/';
+    const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/';
     this.getDataAxios(url);
   }
 
@@ -127,7 +127,7 @@ class SceneGameOver extends Phaser.Scene {
   }
 
   update() {
-    for (let i = 0; i < this.backgrounds.length; i+=1) {
+    for (let i = 0; i < this.backgrounds.length; i += 1) {
       this.backgrounds[i].update();
     }
   }

@@ -2,26 +2,27 @@ import SceneMainMenu from './components/SceneMainMenu';
 import SceneMain from './components/SceneMain';
 import SceneGameOver from './components/SceneGameOver';
 import SceneName from './components/SceneName';
-import '../src/components/Entities';
+import './components/Entities';
+import Phaser from 'phaser';
 
-var config = {
+const config = {
   type: Phaser.WEBGL,
   width: 480,
   height: 640,
   backgroundColor: 'none',
   dom: {
-    createContainer: true
-},
+    createContainer: true,
+  },
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { x: 0, y: 0 }
-    }
+      gravity: { x: 0, y: 0 },
+    },
   },
-  scene: [SceneMainMenu,SceneName, SceneMain, SceneGameOver],
+  scene: [SceneMainMenu, SceneName, SceneMain, SceneGameOver],
   pixelArt: true,
-  roundPixels: true
+  roundPixels: true,
 };
-var game = new Phaser.Game(config);
+const game = new Phaser.Game(config);
 
 export default game;
