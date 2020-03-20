@@ -9,7 +9,7 @@ class SceneGameOver extends Phaser.Scene {
     super({ key: 'SceneGameOver' });
   }
 
-  getDataAxios(url) {
+  static getDataAxios(url) {
     const response = axios.get(url, {
       headers: { 'Content-Type': 'application/json' }
     });

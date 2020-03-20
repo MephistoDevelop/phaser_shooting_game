@@ -2,8 +2,8 @@ import SceneMainMenu from './components/SceneMainMenu';
 import SceneMain from './components/SceneMain';
 import SceneGameOver from './components/SceneGameOver';
 import SceneName from './components/SceneName';
-import './components/Entities';
 import Phaser from 'phaser';
+import './components/Entities';
 
 const config = {
   type: Phaser.WEBGL,
