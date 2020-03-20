@@ -1,4 +1,3 @@
-
 const path = require('path');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
@@ -6,21 +5,21 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist')
   },
   watch: true,
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'babel-loader', 'eslint-loader']
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader'],
-      },
-    ],
-  },
+        use: ['file-loader']
+      }
+    ]
+  }
 };
 
 module.exports = {
@@ -34,9 +33,9 @@ module.exports = {
         './dist/*.js',
         './dist/*.css',
         './src/*.js',
-        './src/img/*.jpg',
+        './src/img/*.jpg'
       ],
-      server: { baseDir: ['dist'] },
-    }),
-  ],
+      server: { baseDir: ['dist'] }
+    })
+  ]
 };
