@@ -5,7 +5,7 @@
 import axios from 'axios';
 import { ScrollingBackground } from './Entities';
 
-export let playerName = '';
+export const playerName = '';
 class SceneName extends Phaser.Scene {
   constructor() {
     super('SceneName');

@@ -1,9 +1,8 @@
+import Phaser from 'phaser';
 import SceneMainMenu from './components/SceneMainMenu';
 import SceneMain from './components/SceneMain';
 import SceneGameOver from './components/SceneGameOver';
 import SceneName from './components/SceneName';
-// eslint-disable import/no-unresolved, import/no-extraneous-dependencies.
-import Phaser from 'phaser';
 import './components/Entities';
 
 const config = {
