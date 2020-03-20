@@ -68,10 +68,13 @@ body {
   margin-right: 43%;
 }
 .userText {
-  margin-right: 28%;
+  margin-right: 37%;
   margin-left: 6%;
   margin-bottom: 3%;
   width: 37%;
+}
+#items-container {
+  height: 250px;
 }
 @media screen and (min-width: 510px) and (max-width: 1000px) {
   #nameBox {
@@ -87,15 +90,15 @@ body {
     color: white;
     display: flex;
     flex-direction: column;
-    width: 67%;
+    width: 74%;
     top: -8%;
     font-size: 22px;
-    margin: 3% 56px;
+    margin: 3% 38px;
     padding: 25px 2%;
   }
   #userTitle {
-    margin-right: 22%;
-    margin-left: 23%;
+    margin-right: 50%;
+    margin-left: 9%;
   }
   #items-container {
     width: 90%;
@@ -112,8 +115,7 @@ body {
   }
 
   .userText {
-    margin-right: 30%;
-    width: 15%;
+    width: 70%;
     margin-bottom: 10px;
   }
   #content {
