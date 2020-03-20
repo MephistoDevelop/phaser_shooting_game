@@ -17,7 +17,7 @@ class Entity extends Phaser.GameObjects.Sprite {
         Phaser.Math.Between(0, this.scene.sfx.explosions.length - 1)
       ].play();
       if (this.shootTimer !== undefined) {
-       if (this.shootTimer) {
+        if (this.shootTimer) {
           this.shootTimer.remove(false);
         }
       }
@@ -32,29 +32,32 @@ class Entity extends Phaser.GameObjects.Sprite {
             this.setVisible(false);
           }
         },
-        this,
+        this
       );
       this.setData('isDead', true);
     }
   }
 }
 
- class Player extends Entity{
-  constructor(scene,x,y,type) {
-    super(scene,x,y,type);
+class Player extends Entity {
+  constructor(scene, x, y, type) {
+    super(scene, x, y, type);
     this.setData('speed', 200);
     this.play('sprPlayer');
   }
+
   moveUp() {
     this.body.velocity.y = -this.getData('speed');
   }
+
   moveDown() {
     this.body.velocity.y = this.getData('speed');
   }
+
   moveLeft() {
     this.body.velocity.x = -this.getData('speed');
   }
-  moveRigth(){
+  moveRigth() {
     this.body.velocity.x += 4;
   }
 
@@ -75,9 +78,8 @@ class Entity extends Phaser.GameObjects.Sprite {
     if (this.getData('isShooting')) {
       if (this.getData('timerShootTick') < this.getData('timerShootDelay')) {
         this.setData('timerShootTick', this.getData('timerShootTick') + 1);
-      }
-      else {
-        var laser = new PlayerLaser(this.scene, this.x, this.y);
+      } else {
+        let laser = new PlayerLaser(this.scene, this.x, this.y);
         this.scene.playerLasers.add(laser);
 
         this.scene.sfx.laser.play();
@@ -86,7 +88,6 @@ class Entity extends Phaser.GameObjects.Sprite {
     }
   }
 }
-
 
 class PlayerLaser extends Entity {
   constructor(scene, x, y) {
@@ -117,32 +118,29 @@ class ChaserShip extends Entity {
 
   update() {
     if (!this.getData('isDead') && this.scene.player) {
-      if (Phaser.Math.Distance.Between(
-        this.x,
-        this.y,
-        this.scene.player.x,
-        this.scene.player.y
-      ) < 320) {
-
+      if (
+        Phaser.Math.Distance.Between(
+          this.x,
+          this.y,
+          this.scene.player.x,
+          this.scene.player.y
+        ) < 320
+      ) {
         this.state = this.states.CHASE;
       }
 
       if (this.state == this.states.CHASE) {
-        var dx = this.scene.player.x - this.x;
-        var dy = this.scene.player.y - this.y;
+        let dx = this.scene.player.x - this.x;
+        let dy = this.scene.player.y - this.y;
 
-        var angle = Math.atan2(dy, dx);
+        let angle = Math.atan2(dy, dx);
 
-        var speed = 100;
-        this.body.setVelocity(
-          Math.cos(angle) * speed,
-          Math.sin(angle) * speed
-        );
+        let speed = 100;
+        this.body.setVelocity(Math.cos(angle) * speed, Math.sin(angle) * speed);
 
         if (this.x < this.scene.player.x) {
           this.angle -= 5;
-        }
-        else {
+        } else {
           this.angle += 5;
         }
       }
@@ -160,11 +158,7 @@ class GunShip extends Entity {
     this.shootTimer = this.scene.time.addEvent({
       delay: 1500,
       callback: () => {
-        var laser = new EnemyLaser(
-          this.scene,
-          this.x,
-          this.y
-        );
+        let laser = new EnemyLaser(this.scene, this.x, this.y);
         laser.setScale(this.scaleX);
         this.scene.enemyLasers.add(laser);
       },
@@ -191,7 +185,7 @@ class CarrierShip extends Entity {
   }
 }
 
- class ScrollingBackground {
+class ScrollingBackground {
   constructor(scene, key, velocityY) {
     this.scene = scene;
     this.key = key;
@@ -203,11 +197,11 @@ class CarrierShip extends Entity {
   }
 
   createLayers() {
-    for (var i = 0; i < 1; i++) {
-      var layer = this.scene.add.sprite(0, 0, this.key);
-      layer.y = (layer.displayHeight * i);
-      var flipX = Phaser.Math.Between(0, 10) >= 1 ? -1 : 1;
-      var flipY = Phaser.Math.Between(0, 10) >= 1 ? -1 : 1;
+    for (let i = 0; i < 1; i++) {
+      let layer = this.scene.add.sprite(0, 0, this.key);
+      layer.y = layer.displayHeight * i;
+      let flipX = Phaser.Math.Between(0, 10) >= 1 ? -1 : 1;
+      let flipY = Phaser.Math.Between(0, 10) >= 1 ? -1 : 1;
       layer.setScale(flipX * 2, flipY * 2);
       layer.setDepth(-5 - (i - 1));
       this.scene.physics.world.enableBody(layer, 0);
@@ -219,12 +213,20 @@ class CarrierShip extends Entity {
 
   update() {
     if (this.layers.getChildren()[0].y > 0) {
-      for (var i = 0; i < this.layers.getChildren().length; i++) {
-        var layer = this.layers.getChildren()[i];
-        layer.y = (-layer.displayHeight) + (layer.displayHeight * i);
+      for (let i = 0; i < this.layers.getChildren().length; i++) {
+        let layer = this.layers.getChildren()[i];
+        layer.y = -layer.displayHeight + layer.displayHeight * i;
       }
     }
   }
 }
 
-export {ScrollingBackground,Player,PlayerLaser,Entity,ChaserShip,GunShip,CarrierShip};
+export {
+  ScrollingBackground,
+  Player,
+  PlayerLaser,
+  Entity,
+  ChaserShip,
+  GunShip,
+  CarrierShip
+};
