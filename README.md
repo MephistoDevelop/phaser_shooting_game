@@ -4,7 +4,7 @@
 
 ### Shooting Space Game
 
-![screenshot]()
+![screenshot](spaceships.gif)
 
 Javascript project [Original Page Project](https://www.notion.so/Shooter-game-203e819041c7486bb36f9e65faecba27)
 
