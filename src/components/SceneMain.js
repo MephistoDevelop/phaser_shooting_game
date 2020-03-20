@@ -321,11 +321,13 @@ class SceneMain extends Phaser.Scene {
         player,
         enemy
       ) => {
-          if(this.points > 0) sendScore('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/CdfMzIr7OI42mSFqoSZG/scores/',this.name,this.points);
+
         console.log('Axios: '+this.name + ' - '+this.points)
           player.setData('count',player.getData('count')-1);
           player.explode(false);
           player.setData('count',0);
+          if(this.points > 0) sendScore('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/',this.name,this.points);
+          this.points=0;
           player.explode(true);
           player.onDestroy();
       });
@@ -334,6 +336,8 @@ class SceneMain extends Phaser.Scene {
         player.setData('count',player.getData('count')-1);
         player.explode(false);
         player.setData('count',0);
+        if(this.points > 0) sendScore('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/',this.name,this.points);
+        this.points=0;
         player.explode(true);
         player.onDestroy();
       });
