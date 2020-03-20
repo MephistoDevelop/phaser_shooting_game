@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import {ScrollingBackground,Player,Enemy,ChaserShip,GunShip,CarrierShip} from './Entities';
 import axios from 'axios';
 

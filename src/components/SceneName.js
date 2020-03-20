@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { ScrollingBackground } from './Entities';
 import axios from 'axios';
 

@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 import { ScrollingBackground } from './Entities';
-import axios from 'axios';
+
 class SceneMainMenu extends Phaser.Scene {
   constructor() {
     super({ key: 'SceneMainMenu' });
