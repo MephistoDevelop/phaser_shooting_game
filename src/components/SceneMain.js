@@ -17,7 +17,7 @@ class SceneMain extends Phaser.Scene {
 }
 
   preload() {
-    const scoreLabel =document.createElement('div');
+    const scoreLabel = document.createElement('div');
     scoreLabel.innerHTML = `${this.name} <-> Score: ${this.points}`
     scoreLabel.id = 'score-lbl';
     document.getElementById('content').appendChild(scoreLabel);
@@ -39,9 +39,9 @@ class SceneMain extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32
     });
-    this.load.image("sprLaserPlayer", "img/sprLaserPlayer2.png");
+    this.load.image('sprLaserPlayer', 'img/sprLaserPlayer2.png');
     this.load.image('sprEnemy3', 'img/Enemy4.png');
-    this.load.spritesheet("sprPlayer", "img/player2.png", {
+    this.load.spritesheet('sprPlayer', 'img/player2.png', {
       frameWidth: 38,
       frameHeight: 38
     });
@@ -58,52 +58,52 @@ class SceneMain extends Phaser.Scene {
       frameHeight: 22
     });
 
-    this.load.image("sprLaserEnemy0", "img/sprLaserEnemy0.png");
-    this.load.audio("sndExplode0", "img/sndExplode0.wav");
-    this.load.audio("sndExplode1", "img/sndExplode1.wav");
-    this.load.audio("sndLaser", "img/sndLaser.wav");
+    this.load.image('sprLaserEnemy0', 'img/sprLaserEnemy0.png');
+    this.load.audio('sndExplode0', 'img/sndExplode0.wav');
+    this.load.audio('sndExplode1', 'img/sndExplode1.wav');
+    this.load.audio('sndLaser', 'img/sndLaser.wav');
   }
 
   create() {
 
-    this.life=this.add.sprite(455,30, 'sprLife');
-  this.life2=this.add.sprite(425,30, 'sprLife1');
-    this.life3=this.add.sprite(395,30, 'sprLife2');
+    this.life = this.add.sprite(455,30, 'sprLife');
+  this.life2 = this.add.sprite(425,30, 'sprLife1');
+    this.life3 = this.add.sprite(395,30, 'sprLife2');
 
     this.anims.create({
-      key: "sprPlayer",
-      frames: this.anims.generateFrameNumbers("sprPlayer"),
+      key: 'sprPlayer',
+      frames: this.anims.generateFrameNumbers('sprPlayer'),
       frameRate: 20,
       repeat: -1
     });
 
     this.anims.create({
-      key: "sprEnemy0",
-      frames: this.anims.generateFrameNumbers("sprEnemy0"),
+      key: 'sprEnemy0',
+      frames: this.anims.generateFrameNumbers('sprEnemy0'),
       frameRate: 20,
       repeat: -1
     });
 
     this.anims.create({
-      key: "sprEnemy2",
-      frames: this.anims.generateFrameNumbers("sprEnemy2"),
+      key: 'sprEnemy2',
+      frames: this.anims.generateFrameNumbers('sprEnemy2'),
       frameRate: 20,
       repeat: -1
     });
 
     this.anims.create({
-      key: "sprExplosion",
-      frames: this.anims.generateFrameNumbers("sprExplosion"),
+      key: 'sprExplosion',
+      frames: this.anims.generateFrameNumbers('sprExplosion'),
       frameRate: 20,
       repeat: 0
     });
 
     this.sfx = {
       explosions: [
-        this.sound.add("sndExplode0"),
-        this.sound.add("sndExplode1")
+        this.sound.add('sndExplode0'),
+        this.sound.add('sndExplode1')
       ],
-      laser: this.sound.add("sndLaser")
+      laser: this.sound.add('sndLaser')
     };
     this.sfx.laser.play();
 
@@ -111,7 +111,7 @@ class SceneMain extends Phaser.Scene {
       this,
       this.game.config.width * 0.5,
       this.game.config.height * 0.5,
-      "sprPlayer"
+      'sprPlayer'
     );
 
 
@@ -127,7 +127,7 @@ class SceneMain extends Phaser.Scene {
     this.time.addEvent({
       delay:1000,
       callback: () => {
-        var enemy = null;
+        let enemy = null;
 
         if (Phaser.Math.Between(0, 10) >= 3) {
           enemy = new GunShip(
@@ -191,17 +191,17 @@ class SceneMain extends Phaser.Scene {
 
 
     this.backgrounds = [];
-    for (var i = 0; i < 5; i++) {
-      var keys = ['sprBg0', 'sprBg1'];
-      var key = keys[Phaser.Math.Between(0, keys.length - 1)];
-      var bg = new ScrollingBackground(this, key, i * 10);
+    for(let i = 0; i < 5; i+=1) {
+      const keys = ['sprBg0', 'sprBg1'];
+      const key = keys[Phaser.Math.Between(0, keys.length - 1)];
+      let bg = new ScrollingBackground(this, key, i * 10);
       this.backgrounds.push(bg);
     }
   }
 
   update() {
     this.onDie()
-    if (!this.player.getData("isDead")) {
+    if (!this.player.getData('isDead')) {
       this.player.update();
       if (this.keyW.isDown) {
         this.player.moveUp();
@@ -217,16 +217,16 @@ class SceneMain extends Phaser.Scene {
       }
 
       if (this.keySpace.isDown) {
-        this.player.setData("isShooting", true);
+        this.player.setData('isShooting', true);
       }
       else {
-        this.player.setData("timerShootTick", this.player.getData("timerShootDelay") +200);
-        this.player.setData("isShooting", false);
+        this.player.setData('timerShootTick', this.player.getData('timerShootDelay') +200);
+        this.player.setData('isShooting', false);
       }
     }
 
-    for (var i = 0; i < this.enemies.getChildren().length; i++) {
-      var enemy = this.enemies.getChildren()[i];
+    for (let i = 0; i < this.enemies.getChildren().length; i+=1) {
+      let enemy = this.enemies.getChildren()[i];
       enemy.update();
       if (
         enemy.x < -enemy.displayWidth ||
@@ -242,8 +242,8 @@ class SceneMain extends Phaser.Scene {
         }
       }
     }
-    for (var i = 0; i < this.enemyLasers.getChildren().length; i++) {
-      var laser = this.enemyLasers.getChildren()[i];
+    for (let i = 0; i < this.enemyLasers.getChildren().length; i+=1) {
+      let laser = this.enemyLasers.getChildren()[i];
       laser.update();
       if (
         laser.x < -laser.displayWidth ||
@@ -256,8 +256,8 @@ class SceneMain extends Phaser.Scene {
         }
       }
     }
-    for (var i = 0; i < this.playerLasers.getChildren().length; i++) {
-      var laser = this.playerLasers.getChildren()[i];
+    for (let i = 0; i < this.playerLasers.getChildren().length; i+=1) {
+      let laser = this.playerLasers.getChildren()[i];
       laser.update();
       if (
         laser.x < -laser.displayWidth ||
@@ -274,9 +274,9 @@ class SceneMain extends Phaser.Scene {
   }
 
   getEnemiesByType(type) {
-    var arr = [];
-    for (var i = 0; i < this.enemies.getChildren().length; i++) {
-      var enemy = this.enemies.getChildren()[i];
+    let arr = [];
+    for (let i = 0; i < this.enemies.getChildren().length; i++) {
+      let enemy = this.enemies.getChildren()[i];
       if (enemy.getData('type') == type) {
         arr.push(enemy);
       }
@@ -293,7 +293,7 @@ class SceneMain extends Phaser.Scene {
         this,
         this.game.config.width * 0.5,
         this.game.config.height * 0.9,
-        "sprPlayer"
+        'sprPlayer'
       );
       this.physics.add.overlap(this.player, this.enemies,(
         player,
@@ -317,7 +317,7 @@ class SceneMain extends Phaser.Scene {
         this,
         this.game.config.width * 0.5,
         this.game.config.height * 0.9,
-        "sprPlayer"
+        'sprPlayer'
       );
       this.physics.add.overlap(this.player, this.enemies, (
         player,

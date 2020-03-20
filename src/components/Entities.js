@@ -59,6 +59,7 @@ class Player extends Entity {
   moveLeft() {
     this.body.velocity.x = -this.getData('speed');
   }
+
   moveRigth() {
     this.body.velocity.x += 4;
   }
@@ -81,7 +82,7 @@ class Player extends Entity {
       if (this.getData('timerShootTick') < this.getData('timerShootDelay')) {
         this.setData('timerShootTick', this.getData('timerShootTick') + 1);
       } else {
-        let laser = new PlayerLaser(this.scene, this.x, this.y);
+        const laser = new PlayerLaser(this.scene, this.x, this.y);
         this.scene.playerLasers.add(laser);
 
         this.scene.sfx.laser.play();
@@ -131,11 +132,11 @@ class ChaserShip extends Entity {
         this.state = this.states.CHASE;
       }
 
-      if (this.state == this.states.CHASE) {
-        let dx = this.scene.player.x - this.x;
-        let dy = this.scene.player.y - this.y;
+      if (this.state === this.states.CHASE) {
+        const dx = this.scene.player.x - this.x;
+        const dy = this.scene.player.y - this.y;
 
-        let angle = Math.atan2(dy, dx);
+        angle angle = Math.atan2(dy, dx);
 
         let speed = 100;
         this.body.setVelocity(Math.cos(angle) * speed, Math.sin(angle) * speed);
@@ -160,7 +161,7 @@ class GunShip extends Entity {
     this.shootTimer = this.scene.time.addEvent({
       delay: 1500,
       callback: () => {
-        let laser = new EnemyLaser(this.scene, this.x, this.y);
+        const laser = new EnemyLaser(this.scene, this.x, this.y);
         laser.setScale(this.scaleX);
         this.scene.enemyLasers.add(laser);
       },
@@ -199,11 +200,11 @@ class ScrollingBackground {
   }
 
   createLayers() {
-    for (let i = 0; i < 1; i++) {
-      let layer = this.scene.add.sprite(0, 0, this.key);
+    for (let i = 0; i < 1; i+=1) {
+      const layer = this.scene.add.sprite(0, 0, this.key);
       layer.y = layer.displayHeight * i;
-      let flipX = Phaser.Math.Between(0, 10) >= 1 ? -1 : 1;
-      let flipY = Phaser.Math.Between(0, 10) >= 1 ? -1 : 1;
+      const flipX = Phaser.Math.Between(0, 10) >= 1 ? -1 : 1;
+      const flipY = Phaser.Math.Between(0, 10) >= 1 ? -1 : 1;
       layer.setScale(flipX * 2, flipY * 2);
       layer.setDepth(-5 - (i - 1));
       this.scene.physics.world.enableBody(layer, 0);
@@ -215,8 +216,8 @@ class ScrollingBackground {
 
   update() {
     if (this.layers.getChildren()[0].y > 0) {
-      for (let i = 0; i < this.layers.getChildren().length; i++) {
-        let layer = this.layers.getChildren()[i];
+      for (let i = 0; i < this.layers.getChildren().length; i+=1) {
+        const layer = this.layers.getChildren()[i];
         layer.y = -layer.displayHeight + layer.displayHeight * i;
       }
     }
