@@ -346,6 +346,11 @@ class SceneMain extends Phaser.Scene {
     if(this.player.getData('count')===0){
       this.life3.destroy();
 
+    this.keyW = this.input.keyboard.clearCaptures();
+    this.keyS = this.input.keyboard.clearCaptures();
+    this.keyA = this.input.keyboard.clearCaptures();
+    this.keyD = this.input.keyboard.clearCaptures();
+    this.keySpace = this.input.keyboard.clearCaptures();
     }
 
   }
