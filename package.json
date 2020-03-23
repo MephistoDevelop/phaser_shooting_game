@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watch",
-    "build": "webpack --config webpack.config.js --mode development --open",
+    "build": "webpack --config webpack.config.js --mode development",
     "builddev": "webpack --mode development",
-    "start": "webpack-dev-server --mode development --open"
+    "start": "webpack-dev-server --mode development"
   },
   "keywords": [],
   "author": "MephistoDevelop <inesherald@gmail.com>",
