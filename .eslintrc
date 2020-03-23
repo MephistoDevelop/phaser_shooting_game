@@ -5,8 +5,8 @@
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2015,
-    "import/extensions": "off",
-    "import/no-unresolved": "off"
+    "import/extensions": 0,
+    "import/no-unresolved": 0
   },
   "env": {
     "browser": true
