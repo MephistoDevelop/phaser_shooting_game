@@ -2,9 +2,8 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable class-methods-use-this */
 // eslint-disable import/no-unresolved, import/no-extraneous-dependencies.
-const axios = require('axios').default;
+import axios from 'axios'
 import { ScrollingBackground } from './Entities';
-
 
 class SceneName extends Phaser.Scene {
   constructor() {
