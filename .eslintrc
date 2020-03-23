@@ -19,13 +19,16 @@
     "browser": true
   },
   "rules": {
-    "no-global-assign": [
-      "error",
+    "import/no-unresolved": [
+      2,
       {
-        "exceptions": [
-          "Object"
-        ]
+        "commonjs": true,
+        "amd": true
       }
-    ]
+    ],
+    "import/named": 2,
+    "import/namespace": 2,
+    "import/default": 2,
+    "import/export": 2,
   }
 }
