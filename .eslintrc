@@ -1,10 +1,6 @@
 {
   "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "webpack.config.js"
-      }
-    }
+    "import/resolver": "webpack"
   },
   "parserOptions": {
     "sourceType": "module",
@@ -12,15 +8,10 @@
     "import/extensions": "off",
     "import/no-unresolved": "off"
   },
-  "globals": {
-    "phaser": true,
-    "axios": true
-  },
   "env": {
     "browser": true
   },
   "rules": {
-    "import/resolver": 2,
     "no-global-assign": [
       "error",
       {
