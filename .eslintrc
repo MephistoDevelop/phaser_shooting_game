@@ -12,11 +12,7 @@
     "browser": true
   },
   "rules": {
-    "import/resolver": {
-      "alias": {
-        "map": ["mycomponents", "./app/components"]
-      }
-    },
+    "import/resolver": 0,
     "no-global-assign": [
       "error",
       {

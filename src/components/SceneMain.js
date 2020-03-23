@@ -5,7 +5,11 @@
 // eslint-disable import/no-unresolved, import/no-extraneous-dependencies.
 import axios from 'axios';
 import {
-  ScrollingBackground, Player, ChaserShip, GunShip, CarrierShip
+  ScrollingBackground,
+  Player,
+  ChaserShip,
+  GunShip,
+  CarrierShip
 } from './Entities';
 
 class SceneMain extends Phaser.Scene {
@@ -14,7 +18,7 @@ class SceneMain extends Phaser.Scene {
   }
 
   init(data) {
-    this.name = (data.name === '') ? 'Player' : data.name;
+    this.name = data.name === '' ? 'Player' : data.name;
     this.life = null;
     this.life2 = null;
     this.life3 = null;
@@ -27,7 +31,6 @@ class SceneMain extends Phaser.Scene {
     scoreLabel.innerHTML = `${this.name} <-> Score: ${this.points}`;
     scoreLabel.id = 'score-lbl';
     document.getElementById('content').appendChild(scoreLabel);
-
 
     this.load.spritesheet('sprLife', 'img/life.png', {
       frameWidth: 25,
@@ -126,12 +129,16 @@ class SceneMain extends Phaser.Scene {
       'sprPlayer'
     );
 
-
+    this.keyUp = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.keyUp
+    );
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-    this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.keySpace = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.SPACE
+    );
     this.enemies = this.add.group();
     this.enemyLasers = this.add.group();
     this.playerLasers = this.add.group();
@@ -172,35 +179,31 @@ class SceneMain extends Phaser.Scene {
       loop: true
     });
 
-    this.physics.add.collider(this.playerLasers, this.enemies, (
-      playerLaser,
-      enemy
-    ) => {
-      if (enemy) {
-        if (enemy.onDestroy !== undefined) {
-          enemy.onDestroy();
+    this.physics.add.collider(
+      this.playerLasers,
+      this.enemies,
+      (playerLaser, enemy) => {
+        if (enemy) {
+          if (enemy.onDestroy !== undefined) {
+            enemy.onDestroy();
+          }
+          enemy.explode(false);
+          playerLaser.destroy();
+          this.upScore();
         }
-        enemy.explode(false);
-        playerLaser.destroy();
-        this.upScore();
       }
-    });
+    );
 
     this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
       player.setData('count', player.getData('count') - 1);
       player.explode(false);
     });
 
-
     this.player.setData('count', this.lifeCount);
-    this.physics.add.overlap(this.player, this.enemies, (
-      player,
-      enemy
-    ) => {
+    this.physics.add.overlap(this.player, this.enemies, (player, enemy) => {
       player.setData('count', player.getData('count') - 1);
       player.explode(false);
     });
-
 
     this.backgrounds = [];
     for (let i = 0; i < 5; i += 1) {
@@ -229,7 +232,10 @@ class SceneMain extends Phaser.Scene {
       if (this.keySpace.isDown) {
         this.player.setData('isShooting', true);
       } else {
-        this.player.setData('timerShootTick', this.player.getData('timerShootDelay') + 200);
+        this.player.setData(
+          'timerShootTick',
+          this.player.getData('timerShootDelay') + 200
+        );
         this.player.setData('isShooting', false);
       }
     }
@@ -238,10 +244,10 @@ class SceneMain extends Phaser.Scene {
       const enemy = this.enemies.getChildren()[i];
       enemy.update();
       if (
-        enemy.x < -enemy.displayWidth
-        || enemy.x > this.game.config.width + enemy.displayWidth
-        || enemy.y < -enemy.displayHeight * 4
-        || enemy.y > this.game.config.height + enemy.displayHeight
+        enemy.x < -enemy.displayWidth ||
+        enemy.x > this.game.config.width + enemy.displayWidth ||
+        enemy.y < -enemy.displayHeight * 4 ||
+        enemy.y > this.game.config.height + enemy.displayHeight
       ) {
         if (enemy) {
           if (enemy.onDestroy !== undefined) {
@@ -255,10 +261,10 @@ class SceneMain extends Phaser.Scene {
       const laser = this.enemyLasers.getChildren()[i];
       laser.update();
       if (
-        laser.x < -laser.displayWidth
-        || laser.x > this.game.config.width + laser.displayWidth
-        || laser.y < -laser.displayHeight * 4
-        || laser.y > this.game.config.height + laser.displayHeight
+        laser.x < -laser.displayWidth ||
+        laser.x > this.game.config.width + laser.displayWidth ||
+        laser.y < -laser.displayHeight * 4 ||
+        laser.y > this.game.config.height + laser.displayHeight
       ) {
         if (laser) {
           laser.destroy();
@@ -269,10 +275,10 @@ class SceneMain extends Phaser.Scene {
       const laser = this.playerLasers.getChildren()[i];
       laser.update();
       if (
-        laser.x < -laser.displayWidth
-        || laser.x > this.game.config.width + laser.displayWidth
-        || laser.y < -laser.displayHeight * 4
-        || laser.y > this.game.config.height + laser.displayHeight
+        laser.x < -laser.displayWidth ||
+        laser.x > this.game.config.width + laser.displayWidth ||
+        laser.y < -laser.displayHeight * 4 ||
+        laser.y > this.game.config.height + laser.displayHeight
       ) {
         if (laser) {
           laser.destroy();
@@ -301,20 +307,21 @@ class SceneMain extends Phaser.Scene {
         this.game.config.height * 0.9,
         'sprPlayer'
       );
-      this.physics.add.overlap(this.player, this.enemies, (
-        player,
-        enemy
-      ) => {
+      this.physics.add.overlap(this.player, this.enemies, (player, enemy) => {
         player.setData('count', player.getData('count') - 1);
         player.explode(false);
         player.setData('count', 1);
       });
 
-      this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
-        player.setData('count', player.getData('count') - 1);
-        player.explode(false);
-        player.setData('count', 1);
-      });
+      this.physics.add.overlap(
+        this.player,
+        this.enemyLasers,
+        (player, laser) => {
+          player.setData('count', player.getData('count') - 1);
+          player.explode(false);
+          player.setData('count', 1);
+        }
+      );
     }
     if (this.player.getData('count') === 1) {
       this.life2.destroy();
@@ -324,28 +331,39 @@ class SceneMain extends Phaser.Scene {
         this.game.config.height * 0.9,
         'sprPlayer'
       );
-      this.physics.add.overlap(this.player, this.enemies, (
-        player,
-        enemy
-      ) => {
+      this.physics.add.overlap(this.player, this.enemies, (player, enemy) => {
         player.setData('count', player.getData('count') - 1);
         player.explode(false);
         player.setData('count', 0);
-        if (this.points > 0) sendScore('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/', this.name, this.points);
+        if (this.points > 0)
+          sendScore(
+            'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/',
+            this.name,
+            this.points
+          );
         this.points = 0;
         player.explode(true);
         player.onDestroy();
       });
 
-      this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
-        player.setData('count', player.getData('count') - 1);
-        player.explode(false);
-        player.setData('count', 0);
-        if (this.points > 0) sendScore('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/', this.name, this.points);
-        this.points = 0;
-        player.explode(true);
-        player.onDestroy();
-      });
+      this.physics.add.overlap(
+        this.player,
+        this.enemyLasers,
+        (player, laser) => {
+          player.setData('count', player.getData('count') - 1);
+          player.explode(false);
+          player.setData('count', 0);
+          if (this.points > 0)
+            sendScore(
+              'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/',
+              this.name,
+              this.points
+            );
+          this.points = 0;
+          player.explode(true);
+          player.onDestroy();
+        }
+      );
     }
     if (this.player.getData('count') === 0) {
       this.life3.destroy();
