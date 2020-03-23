@@ -1,9 +1,10 @@
 {
   "settings": {
-    "import/core-modules": [
-      "phaser",
-      "axios"
-    ]
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      }
+    }
   },
   "parserOptions": {
     "sourceType": "module",
