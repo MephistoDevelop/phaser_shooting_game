@@ -1,12 +1,19 @@
 {
   "settings": {
-    "import/resolver": "webpack"
+    "import/core-modules": [
+      "phaser",
+      "axios"
+    ]
   },
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2015,
     "import/extensions": "off",
     "import/no-unresolved": "off"
+  },
+  "globals": {
+    "phaser": true,
+    "axios": true
   },
   "env": {
     "browser": true

@@ -20,6 +20,12 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    alias: {
+      'phaser': phaser,
+      'axios': axios,
+    }
+  }
 };
 
 module.exports = {
