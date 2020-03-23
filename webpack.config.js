@@ -1,4 +1,5 @@
 const path = require('path');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -17,7 +18,32 @@ module.exports = {
         test: /\.(png|svg|jpg|gif)$/,
         use: ['file-loader'],
       },
-      'node_modules',
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          fix: true,
+        },
+      },
     ],
   },
+};
+
+module.exports = {
+  watch: true,
+  plugins: [
+    new BrowserSyncPlugin({
+      host: 'localhost',
+      port: 3001,
+      files: [
+        './dist/*.html',
+        './dist/*.js',
+        './dist/*.css',
+        './src/*.js',
+        './src/img/*.jpg',
+      ],
+      server: { baseDir: ['dist'] },
+    }),
+  ],
 };
