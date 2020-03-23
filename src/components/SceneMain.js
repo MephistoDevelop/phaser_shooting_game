@@ -129,9 +129,6 @@ class SceneMain extends Phaser.Scene {
       'sprPlayer'
     );
 
-    this.keyUp = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.keyUp
-    );
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -244,10 +241,10 @@ class SceneMain extends Phaser.Scene {
       const enemy = this.enemies.getChildren()[i];
       enemy.update();
       if (
-        enemy.x < -enemy.displayWidth ||
-        enemy.x > this.game.config.width + enemy.displayWidth ||
-        enemy.y < -enemy.displayHeight * 4 ||
-        enemy.y > this.game.config.height + enemy.displayHeight
+        enemy.x < -enemy.displayWidth
+        || enemy.x > this.game.config.width + enemy.displayWidth
+        || enemy.y < -enemy.displayHeight * 4
+        || enemy.y > this.game.config.height + enemy.displayHeight
       ) {
         if (enemy) {
           if (enemy.onDestroy !== undefined) {
@@ -261,10 +258,10 @@ class SceneMain extends Phaser.Scene {
       const laser = this.enemyLasers.getChildren()[i];
       laser.update();
       if (
-        laser.x < -laser.displayWidth ||
-        laser.x > this.game.config.width + laser.displayWidth ||
-        laser.y < -laser.displayHeight * 4 ||
-        laser.y > this.game.config.height + laser.displayHeight
+        laser.x < -laser.displayWidth
+        || laser.x > this.game.config.width + laser.displayWidth
+        || laser.y < -laser.displayHeight * 4
+        || laser.y > this.game.config.height + laser.displayHeight
       ) {
         if (laser) {
           laser.destroy();
@@ -275,10 +272,10 @@ class SceneMain extends Phaser.Scene {
       const laser = this.playerLasers.getChildren()[i];
       laser.update();
       if (
-        laser.x < -laser.displayWidth ||
-        laser.x > this.game.config.width + laser.displayWidth ||
-        laser.y < -laser.displayHeight * 4 ||
-        laser.y > this.game.config.height + laser.displayHeight
+        laser.x < -laser.displayWidth
+        || laser.x > this.game.config.width + laser.displayWidth
+        || laser.y < -laser.displayHeight * 4
+        || laser.y > this.game.config.height + laser.displayHeight
       ) {
         if (laser) {
           laser.destroy();
@@ -335,12 +332,13 @@ class SceneMain extends Phaser.Scene {
         player.setData('count', player.getData('count') - 1);
         player.explode(false);
         player.setData('count', 0);
-        if (this.points > 0)
+        if (this.points > 0) {
           sendScore(
             'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/',
             this.name,
             this.points
           );
+        }
         this.points = 0;
         player.explode(true);
         player.onDestroy();
@@ -353,12 +351,13 @@ class SceneMain extends Phaser.Scene {
           player.setData('count', player.getData('count') - 1);
           player.explode(false);
           player.setData('count', 0);
-          if (this.points > 0)
+          if (this.points > 0) {
             sendScore(
               'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/',
               this.name,
               this.points
             );
+          }
           this.points = 0;
           player.explode(true);
           player.onDestroy();

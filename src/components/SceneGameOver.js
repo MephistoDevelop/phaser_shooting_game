@@ -19,10 +19,9 @@ class SceneGameOver extends Phaser.Scene {
       const itemsContainer = document.createElement('div');
       itemsContainer.id = 'items-container';
       element.id = 'score-title-container';
-      element.innerHTML =
-        '<div class="item-score"><span id="userTitle">User  ' +
-        '</span>  <span id="scoreTitle">Score ' +
-        '</span></div>';
+      element.innerHTML = '<div class="item-score"><span id="userTitle">User  '
+        + '</span>  <span id="scoreTitle">Score '
+        + '</span></div>';
       document.getElementById('content').appendChild(element);
       document.getElementById('content').appendChild(itemsContainer);
       for (let i = 0; i <= scoreArray.length; i += 1) {
@@ -42,8 +41,7 @@ class SceneGameOver extends Phaser.Scene {
     const score = document.createElement('div');
     score.id = 'score-container';
     document.getElementById('score-lbl').remove();
-    const url =
-      'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/';
+    const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/7FyLZxJetCb8JHJ8nmn2/scores/';
     this.getDataAxios(url);
   }
 
