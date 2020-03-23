@@ -1,19 +1,12 @@
 {
   "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [
-          ".js",
-          ".jsx",
-        ]
-      }
-    }
+    "import/resolver": "webpack"
   },
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2015,
     "import/extensions": "off",
-    "import/no-unresolved": "o"
+    "import/no-unresolved": "off"
   },
   "env": {
     "browser": true

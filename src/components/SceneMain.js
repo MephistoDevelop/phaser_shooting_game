@@ -3,7 +3,7 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable no-use-before-define */
 // eslint-disable import/no-unresolved, import/no-extraneous-dependencies.
-import axios from '../../node_modules/axios';
+import axios from 'axios';
 import {
   ScrollingBackground,
   Player,
