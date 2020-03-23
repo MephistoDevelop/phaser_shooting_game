@@ -1,22 +1,30 @@
 {
   "settings": {
-    "import/resolver": "webpack"
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "src"
+        ]
+      }
+    }
   },
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2015,
-    "import/extensions": "on",
-    "import/no-unresolved": "on"
+    "import/extensions": "off",
+    "import/no-unresolved": "o"
   },
   "env": {
     "browser": true
   },
   "rules": {
-    "import/resolver": 0,
+    "import/resolver": 2,
     "no-global-assign": [
       "error",
       {
-        "exceptions": ["Object"]
+        "exceptions": [
+          "Object"
+        ]
       }
     ]
   }
