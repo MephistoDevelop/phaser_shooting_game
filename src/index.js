@@ -1,4 +1,5 @@
-import Phaser from 'phaser';
+const Phaser = require('phaser').default;
+
 import SceneMainMenu from './components/SceneMainMenu';
 import SceneMain from './components/SceneMain';
 import SceneGameOver from './components/SceneGameOver';

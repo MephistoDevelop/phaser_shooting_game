@@ -17,7 +17,7 @@ module.exports = {
         test: /\.(png|svg|jpg|gif)$/,
         use: ['file-loader'],
       },
-      'node_modules'
+      'node_modules',
     ],
   },
 };

@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable comma-dangle */
 /* eslint-disable class-methods-use-this */
-import axios from 'axios';
+const axios = require('axios').default;
 import { ScrollingBackground } from './Entities';
 
 class SceneGameOver extends Phaser.Scene {
