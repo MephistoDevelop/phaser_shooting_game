@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from '../node_modules/phaser';
 import SceneMainMenu from './components/SceneMainMenu';
 import SceneMain from './components/SceneMain';
 import SceneGameOver from './components/SceneGameOver';
