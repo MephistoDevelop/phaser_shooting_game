@@ -5,7 +5,7 @@
 import axios from 'axios';
 import { ScrollingBackground } from './Entities';
 
-export let playerName;
+
 class SceneName extends Phaser.Scene {
   constructor() {
     super('SceneName');
@@ -62,8 +62,9 @@ class SceneName extends Phaser.Scene {
     this.btnPlay.on(
       'pointerup',
       () => {
+
         this.btnPlay.setTexture('sprBtnPlay');
-        playerName = document.getElementById('nameBox').value;
+        const playerName = document.getElementById('nameBox').value;
         this.scene.start('SceneMain', { name: playerName });
         document.getElementById('nameBox').outerHTML = '';
       },
