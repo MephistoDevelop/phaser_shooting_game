@@ -2,7 +2,7 @@
 
 > Capstone Project taked from Microverse Curriculum.
 
-![screenshot]()
+![screenshot](./screenshotphaser.gif)
 
 Javascript project [Phaser Project specification Page](https://www.notion.so/Shooter-game-203e819041c7486bb36f9e65faecba27)
 
