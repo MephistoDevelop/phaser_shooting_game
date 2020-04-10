@@ -4,7 +4,7 @@
 
 ![screenshot]()
 
-Javascript project [Original Page Project](https://www.notion.so/Shooter-game-203e819041c7486bb36f9e65faecba27)
+Javascript project [Phaser Project specification Page](https://www.notion.so/Shooter-game-203e819041c7486bb36f9e65faecba27)
 
 ## Built With Javascript
 
@@ -17,6 +17,12 @@ Javascript project [Original Page Project](https://www.notion.so/Shooter-game-20
 ## Live Demo
 
 [Live Demo Link](https://mephistodevelop.github.io/phaser_shooting_game/)
+
+## Future Features
+
+- Add Boss
+- Add Power Ups
+- meteors on game
 
 ## Getting Started
 
