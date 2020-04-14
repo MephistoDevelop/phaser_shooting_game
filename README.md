@@ -1,6 +1,6 @@
 # Shooting Game Project
 
-> Capstone Project taked from Microverse Curriculum.
+> Capstone Project taken from Microverse Curriculum.
 
 ![screenshot](./screenshotphaser.gif)
 
@@ -9,7 +9,7 @@ Javascript project [Phaser Project specification Page](https://www.notion.so/Sho
 ## Built With Javascript
 
 - Html
-- Css
+- CSS
 - JavaScript
 - Webpack
 - Phaser Game Framework
@@ -21,16 +21,16 @@ Javascript project [Phaser Project specification Page](https://www.notion.so/Sho
 ## Future Features
 
 - Add Boss
-- Add Power Ups
+- Add Power-Ups
 - meteors on game
 
 ## Getting Started
 
--To start to use this proyect download this repository to your computer and descompress all the files, after open your terminal from the containing folder and open the index.html file on Google Chrome browser.
+-To start to use this project download this repository to your computer and decompress all the files, after opening your terminal from the containing folder and open the index.html file on Google Chrome browser.
 
 ### Setup
 
-To use this project you will need to download this repository and save in your computer.
+To use this project you will need to download this repository and save it in your computer.
 
 ### Deployment
 
@@ -48,17 +48,17 @@ steps to run the webpage on the browser:
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!
+Contributions, issues, and feature requests are welcome!
 
 Feel free to check the [issues page](issues/).
 
 ## Show your support
 
-Give a ⭐️ if you like this project!
+Give and ⭐️ if you like this project!
 
 ## Acknowledgments
 
-This page was inspired by my own bussines i'm a food-seller on my free times while im not writing code.
+This page was inspired by my own business I'm a food-seller on my free time while I'm not writing code.
 
 ## 📝 License
 
