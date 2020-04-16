@@ -1,6 +1,8 @@
-# Shooting Game Project
+# Spacial Shooting Game
 
-> Capstone Project taken from Microverse Curriculum.
+> Amazing Spacial Shooting Game made with JavaScript | Webpack | Phaser Game Framework | using best coding practice and Test-Driven Development.
+
+## Screenshot
 
 ![screenshot](./screenshotphaser.gif)
 
@@ -20,17 +22,17 @@ Javascript project [Phaser Project specification Page](https://www.notion.so/Sho
 
 ## Future Features
 
-- Add Boss
+- Add a Boss.
 - Add Power-Ups
-- meteors on game
+- Add meteors to the game.
 
 ## Getting Started
 
--To start to use this project download this repository to your computer and decompress all the files, after opening your terminal from the containing folder and open the index.html file on Google Chrome browser.
+- To start using this project, download this repository to your computer and decompress the files. Then open your terminal from the containing folder and open the index.html file on Google Chrome.
 
 ### Setup
 
-To use this project you will need to download this repository and save it in your computer.
+To use this project you will need to download this repository and save it to your computer.
 
 ### Deployment
 
