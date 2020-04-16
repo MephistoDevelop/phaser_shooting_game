@@ -8,7 +8,7 @@
 
 Javascript project [Phaser Project specification Page](https://www.notion.so/Shooter-game-203e819041c7486bb36f9e65faecba27)
 
-## Built With Javascript
+## Built With:
 
 - Html
 - CSS
