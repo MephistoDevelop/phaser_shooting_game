@@ -65,7 +65,3 @@ This page was inspired by my own business I'm a food-seller on my free time whil
 ## 📝 License
 
 This project is [MIT](lic.url) licensed.
-
-### Authors:
-
-- [Cristian Ines (MephistoDevelop)](https://github.com/MephistoDevelop)
