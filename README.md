@@ -1,6 +1,6 @@
 # Spacial Shooting Game
 
-> Amazing Spacial Shooting Game made with JavaScript | Webpack | Phaser Game Framework | using best coding practice and Test-Driven Development.
+> Amazing spacial shooting game made with JavaScript, webpack, and the Phaser game framework. Uses best coding practice.
 
 ## Screenshot
 
@@ -10,9 +10,9 @@ Javascript project [Phaser Project specification Page](https://www.notion.so/Sho
 
 ## Built With:
 
-- Html
+- HTML
 - CSS
-- JavaScript
+- Javascript
 - Webpack
 - Phaser Game Framework
 
